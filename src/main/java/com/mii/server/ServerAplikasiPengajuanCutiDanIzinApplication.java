@@ -8,6 +8,7 @@ public class ServerAplikasiPengajuanCutiDanIzinApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServerAplikasiPengajuanCutiDanIzinApplication.class, args);
+                System.out.println("==========RUNNING==========");
 	}
 
 }
