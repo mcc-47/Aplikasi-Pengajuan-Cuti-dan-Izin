@@ -5,6 +5,7 @@
  */
 package com.mii.server.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,11 +57,14 @@ public class User implements UserDetails {
     
     @JoinColumn(name = "user_id", referencedColumnName = "employee_id", insertable = false, updatable = false)
     @OneToOne(optional = true)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Employee employee;
     @JoinTable(name = "users_roles", joinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")}, inverseJoinColumns = {
         @JoinColumn(name = "role_id", referencedColumnName = "role_id")})
     @ManyToMany
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Basic(optional = true)
     private Collection<Role> roleCollection;
 
     public User() {

@@ -7,6 +7,8 @@ package com.mii.server.services;
 
 import com.mii.server.dto.AuthDto;
 import com.mii.server.dto.LoginDto;
+import com.mii.server.dto.UserDto;
+import com.mii.server.entities.Role;
 import com.mii.server.entities.User;
 import com.mii.server.repositories.UserRepository;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class UserService implements UserDetailsService{
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
     
+//    LOGIN SYSTEM
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -58,6 +61,43 @@ public class UserService implements UserDetailsService{
             grantedAuth.add(auth.getAuthority());
         }
         return new AuthDto(user.getUserId(), user.getUsername(), grantedAuth);
+    }
+    
+//    CRUD
+    public List<User> listAll(){
+        return userRepository.findAll();
+    }
+    
+    public User getOne(Integer id){
+        return userRepository.findById(id).get();
+    }
+    
+    public UserDto create(UserDto user){
+        User newUser = new User(
+                user.getUserId(), 
+                user.getUsername(), 
+                passwordEncoder.encode(user.getPassword()));
+        List<Role> role = new ArrayList<>();
+        role.add(new Role(1));
+        newUser.setRoleCollection(role);
+        userRepository.save(newUser);
+        return user;
+    }
+    
+    public UserDto update(Integer id, UserDto user){
+        User oldUser = userRepository.getOne(id);
+        oldUser.setUsername(user.getUsername());
+        oldUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(oldUser);
+        return user;
+    }
+    
+    public void delete(Integer id){
+        System.out.println("pass delete user");
+        User oldUser = getOne(id);
+        userRepository.delete(oldUser);
+        userRepository.deleteById(id);
+        System.out.println("pass delete user");
     }
     
 }
