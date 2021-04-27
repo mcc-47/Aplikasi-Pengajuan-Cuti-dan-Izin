@@ -5,6 +5,12 @@
     <class>com.mii.server.entities.Privilege</class>
     <class>com.mii.server.entities.Role</class>
     <class>com.mii.server.entities.User</class>
+    <class>com.mii.server.entities.LeaveType</class>
+    <class>com.mii.server.entities.MandatoryLeave</class>
+    <class>com.mii.server.entities.Status</class>
+    <class>com.mii.server.entities.Request</class>
+    <class>com.mii.server.entities.Holiday</class>
+    <class>com.mii.server.entities.ManagerFill</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_appcuti47?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

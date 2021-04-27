@@ -72,19 +72,26 @@ public class Employee implements Serializable {
     @Column(name = "discharge_date")
     @Temporal(TemporalType.DATE)
     private Date dischargeDate;
+    
     @Basic(optional = true)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "managerId")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Employee> employeeCollection;
+    
     @JoinColumn(name = "manager_id", referencedColumnName = "employee_id")
     @ManyToOne(optional = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Employee managerId;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
     @Basic(optional = true)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User user;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeId")
+    @Basic(optional = true)
+    private Collection<Request> requestCollection;
+ 
     public Employee() {
     }
 
@@ -229,6 +236,15 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "com.mii.server.entities.Employee[ employeeId=" + employeeId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Request> getRequestCollection() {
+        return requestCollection;
+    }
+
+    public void setRequestCollection(Collection<Request> requestCollection) {
+        this.requestCollection = requestCollection;
     }
     
 }
