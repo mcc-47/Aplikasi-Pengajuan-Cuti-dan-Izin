@@ -1,67 +1,39 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>Login</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-    </head>
-    <style>
-        .body{
-            background-image: url("https://wallpaperaccess.com/full/658838.jpg");
-            background-size : cover;
-            margin-top: 90px;
-        }
-
-        .list{
-
-            height: 450px;
-            background-color: transparent;     
-            outline-style: solid;
-            outline-color: #ffffff;
-        }</style>
-    <body class="body" >
-        <div class="d-flex flex-wrap justify-content-center align-self-center ">
-            <div class="container col-2 mt-5 list">
-                <br>
-
-
-                <h1 class="text-center" style="color: #ffffff">LOGIN FORM</h1>
-                <small id="emailHelp" class="form-text  text-md" style="color:  #ffffff">Aplikasi Pengajuan Cuti & Izin </small>
-                <form th:action="@{/login}"method="post" th:object="${auth}"  class="needs-validation " novalidate>
-                    <div class="form-group">
-                        <br>
-                        <p th:text="${param.error} ? 'Username or password incorrect !' : '' " class="text-warning" role="alert"></p>
-                        <p th:text="${param.logout} ? 'You have been logged out !' : ''" class="text-warning" role="alert"></p>
-
-                        <label for="exampleInputEmail1 " style="color:  #ffffff">Username</label>
-                        <input type="text" class="form-control " id="username" placeholder="Username" aria-describedby="emailHelp"  th:field="*{userName}"  required >
-                        <div class="invalid-feedback" style="color: white" >
-                            <b>Please input a username.</b>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head_link :: head_link">
+    <body>
+        <div th:replace="fragments/header :: header"></div>
+        <div id='main'>
+            <div id='right' style="background-size: cover; background-image: url('/css/images/wallpaperlogin.jpg')";>
+                <div class="container d-flex justify-content-center align-items-center flex-column" style="height: 100%">
+                    <div class="align-items-center" style="background-color: white; width: 40%; padding: 30px;">
+                        <div class="container d-flex justify-content-center align-items-center flex-column">
+                            <img src="/css/images/metrodata.png" style="width: 30%;">     
+                        <h1 class="title">Login Form</h1>
+                        <p th:text="${param.error} ? 'Username or password incorrect' : ''"></p>
+                        <p th:text="${param.logout} ? 'You have been logged out' : ''"></p>
+                        <form th:action="@{/login}" method="post" th:object="${auth}" class="needs-validation" novalidate>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" th:field="*{username}"required>
+                                <div class="invalid-feedback" style="font-size: 12">
+                                    Please input a valid username
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" th:field="*{password}"required>
+                                <div class="invalid-feedback" style="font-size: 12">
+                                    Please input a valid password
+                                </div>
+                            </div>
+                            <button id="loginForm" type="submit" class="btn btn-primary">Sign In</button>
+                        </form>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1" style="color:  #ffffff">Password</label>
-                        <input type="password" class="form-control"   placeholder="Password" id="password" th:field="*{userPassword}"  required >
-                        <div class="invalid-feedback" style="color: white">
-                            <b>Please input a password.</b>
-                        </div>
-                    </div>
-
-                    <button type="submit"  id="loginForm" class="btn btn-info container " >Submit</button>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-    <script type="text/javascript" charset="utf8" src="/js/login.js"></script>
-</body>
-
+        <div th:replace="fragments/footer :: footer"></div>
+        <div th:replace="fragments/script :: script"></div>
+    </body>
 </html>

@@ -1,0 +1,36 @@
+<div th:fragment="modal">
+    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title" id="exampleModalLabel">Contacts</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formModal" name="myForm" action="#" method="post" class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" aria-describedby="phoneHelp" placeholder="Enter your phone number" required>
+                            <small id="phoneHelp" class="form-text text-muted">Your information is safe with us.</small>
+                            <div class="invalid-feedback" style="font-size: 12">
+                                Please input your phone number
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn</label>
+                            <input type="text" id="linkedin" name="linkedin" class="form-control" placeholder="Enter your LinkedIn" required>
+                            <div class="invalid-feedback" style="font-size: 12">
+                                Please input your LinkedIn
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
