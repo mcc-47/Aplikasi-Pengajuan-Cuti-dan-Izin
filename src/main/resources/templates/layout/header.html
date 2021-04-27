@@ -1,0 +1,31 @@
+<div class="container-pt-3 fixed-top " th:fragment="header" style="background-color: #3e8aa2;font-family: Grava">
+    <nav class="navbar navbar-expand-lg navbar-light  " style="background-color: #3e8aa2  ">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-start mr-2" id="navbarNavDropdown">
+            <ul class="navbar-nav">  
+
+            </ul>
+            <a class="navbar-brand d-flex " style="color: white;"th:href="@{/dashboard}"><b class="mr-2">MCC-47</b>Dashboards</a>
+
+        </div>
+        <div class="collapse navbar-collapse d-flex justify-content-end mr-2" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item pt-2 ">
+
+                    <p class="badge badge-dark pl-2 pr-2  pt-2 pb-2" th:text="*{username}"></p>
+                </li>
+
+                <li class="nav-item">
+
+                    <form id="logoutform" class="form-inline my-0 my-2 my-lg-0" action="/logout">
+                        <button id="logoutButton" class="btn mt-1  " style="color: #2b3137;background-color: #3e8aa2;" th:if="not ${#strings.contains(#httpServletRequest.requestURI, '/login')}"  type="button"><i class="fas fa-sign-out-alt" style="font-size: 1.5em;"></i></button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>     
+</div>
+<script type="text/javascript" charset="utf8" src="/js/js.js"></script>
