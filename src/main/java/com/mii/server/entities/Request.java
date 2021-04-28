@@ -5,6 +5,7 @@
  */
 package com.mii.server.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -40,7 +41,7 @@ public class Request implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "req_id")
     private Integer reqId;
@@ -62,6 +63,8 @@ public class Request implements Serializable {
     private LeaveType leaveId;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "request")
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Basic(optional = true)
     private ManagerFill managerFill;
 
     public Request() {
@@ -75,6 +78,30 @@ public class Request implements Serializable {
         this.reqId = reqId;
         this.startDate = startDate;
         this.reasons = reasons;
+    }
+    
+    public Request(Employee employeeId, LeaveType leaveId, Date startDate, String reasons) {
+        this.employeeId = employeeId;
+        this.leaveId = leaveId;
+        this.startDate = startDate;
+        this.reasons = reasons;
+    }
+
+    public Request(Integer reqId, Employee employeeId, LeaveType leaveId, Date startDate, String reasons) {
+        this.reqId = reqId;
+        this.startDate = startDate;
+        this.reasons = reasons;
+        this.employeeId = employeeId;
+        this.leaveId = leaveId;
+    }
+
+    public Request(Integer reqId, Employee employeeId, LeaveType leaveId, Date startDate, String reasons, ManagerFill managerFill) {
+        this.reqId = reqId;
+        this.startDate = startDate;
+        this.reasons = reasons;
+        this.employeeId = employeeId;
+        this.leaveId = leaveId;
+        this.managerFill = managerFill;
     }
 
     public Integer getReqId() {

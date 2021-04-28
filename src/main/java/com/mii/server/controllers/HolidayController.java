@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -31,22 +32,22 @@ public class HolidayController {
     HolidayService holidayService;
     
     @GetMapping
-    public List<Holiday> getAllHoliday(){
+    public @ResponseBody List<Holiday> getAllHoliday(){
         return holidayService.listAll();
     }
     
     @GetMapping("/{id}")
-    public Holiday getOneHoliday(@PathVariable Integer id){
+    public @ResponseBody Holiday getOneHoliday(@PathVariable Integer id){
         return holidayService.getOne(id);
     }
     
     @PostMapping
-    public Holiday createHoliday(@RequestBody Holiday holiday){
+    public @ResponseBody Holiday createHoliday(@RequestBody Holiday holiday){
         return holidayService.create(holiday);
     }
     
     @PutMapping("/{id}")
-    public Holiday updateHoliday(@PathVariable Integer id, @RequestBody Holiday holiday){
+    public @ResponseBody Holiday updateHoliday(@PathVariable Integer id, @RequestBody Holiday holiday){
         return holidayService.update(id, holiday);
     }
     

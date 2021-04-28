@@ -5,8 +5,8 @@
  */
 package com.mii.server.controllers;
 
-import com.mii.server.dto.EmployeeDto;
-import com.mii.server.services.EmployeeService;
+import com.mii.server.entities.ManagerFill;
+import com.mii.server.services.ManagerFillService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,34 +24,36 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jakab
  */
 @RestController
-@RequestMapping("/api/employee")
-public class EmployeeController {
+@RequestMapping("/api/manager-fill")
+public class ManagerFillController {
     
     @Autowired
-    EmployeeService employeeService;
+    ManagerFillService managerFillService;
     
+    //    CRUD MAPING
     @GetMapping
-    public @ResponseBody List<EmployeeDto> getAllEmployee(){
-        return employeeService.listAll();
+    public @ResponseBody List<ManagerFill> getAllManagerFill(){
+        return managerFillService.listAll();
     }
     
     @GetMapping("/{id}")
-    public @ResponseBody EmployeeDto getOneEmployee(@PathVariable Integer id){
-        return employeeService.getOneById(id);
+    public @ResponseBody ManagerFill getOneManagerFill(@PathVariable Integer id){
+        return managerFillService.getOne(id);
     }
     
     @PostMapping
-    public @ResponseBody EmployeeDto createEmployee(@RequestBody EmployeeDto emp){
-        return employeeService.create(emp);
+    public @ResponseBody ManagerFill createManagerFill(@RequestBody ManagerFill managerFill){
+        return managerFillService.create(managerFill);
     }
     
     @PutMapping("/{id}")
-    public @ResponseBody EmployeeDto updateEmployee(@PathVariable Integer id, @RequestBody EmployeeDto emp){
-        return employeeService.update(id, emp);
+    public @ResponseBody ManagerFill updateManagerFill(@PathVariable Integer id, @RequestBody ManagerFill managerFill){
+        return managerFillService.update(id, managerFill);
     }
     
     @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable Integer id){
-        employeeService.delete(id);
+    public void deleteManagerFill(@PathVariable Integer id){
+        managerFillService.delete(id);
     }
+    
 }

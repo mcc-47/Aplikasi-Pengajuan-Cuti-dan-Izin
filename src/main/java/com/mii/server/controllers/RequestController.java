@@ -5,8 +5,9 @@
  */
 package com.mii.server.controllers;
 
-import com.mii.server.dto.EmployeeDto;
-import com.mii.server.services.EmployeeService;
+import com.mii.server.dto.RequestDto;
+import com.mii.server.entities.Request;
+import com.mii.server.services.RequestService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,34 +25,36 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jakab
  */
 @RestController
-@RequestMapping("/api/employee")
-public class EmployeeController {
+@RequestMapping("/api/request")
+public class RequestController {
     
     @Autowired
-    EmployeeService employeeService;
+    RequestService requestService;
     
+//    CRUD MAPING
     @GetMapping
-    public @ResponseBody List<EmployeeDto> getAllEmployee(){
-        return employeeService.listAll();
+    public @ResponseBody List<Request> getAllRequest(){
+        return requestService.listAll();
     }
     
     @GetMapping("/{id}")
-    public @ResponseBody EmployeeDto getOneEmployee(@PathVariable Integer id){
-        return employeeService.getOneById(id);
+    public @ResponseBody Request getOneRequest(@PathVariable Integer id){
+        return requestService.getOne(id);
     }
     
     @PostMapping
-    public @ResponseBody EmployeeDto createEmployee(@RequestBody EmployeeDto emp){
-        return employeeService.create(emp);
+    public @ResponseBody Request createRequest(@RequestBody RequestDto request){
+        return requestService.create(request);
     }
     
     @PutMapping("/{id}")
-    public @ResponseBody EmployeeDto updateEmployee(@PathVariable Integer id, @RequestBody EmployeeDto emp){
-        return employeeService.update(id, emp);
+    public @ResponseBody Request updateRequest(@PathVariable Integer id, @RequestBody RequestDto request){
+        return requestService.update(id, request);
     }
     
     @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable Integer id){
-        employeeService.delete(id);
+    public void deleteRequest(@PathVariable Integer id){
+        requestService.delete(id);
     }
+    
 }

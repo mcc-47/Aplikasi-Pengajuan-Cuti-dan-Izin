@@ -5,6 +5,7 @@
  */
 package com.mii.server.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -48,7 +49,7 @@ public class ManagerFill implements Serializable {
     @Basic(optional = false)
     @Column(name = "manager_id")
     private int managerId;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "approvement_date")
     @Temporal(TemporalType.DATE)
     private Date approvementDate;
@@ -58,7 +59,8 @@ public class ManagerFill implements Serializable {
     private Status statusId;
     
     @JoinColumn(name = "req_id", referencedColumnName = "req_id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = true)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Request request;
 
     public ManagerFill() {
@@ -73,6 +75,13 @@ public class ManagerFill implements Serializable {
         this.note = note;
         this.managerId = managerId;
         this.approvementDate = approvementDate;
+    }
+
+    public ManagerFill(Integer reqId, String note, int managerId, Status statusId) {
+        this.reqId = reqId;
+        this.note = note;
+        this.managerId = managerId;
+        this.statusId = statusId;
     }
 
     public Integer getReqId() {

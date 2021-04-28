@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -33,28 +34,28 @@ public class UserController {
     UserService userService;
     
     @PostMapping("/login")
-    public AuthDto loginUser(@RequestBody LoginDto loginDto) throws Exception{
+    public @ResponseBody AuthDto loginUser(@RequestBody LoginDto loginDto) throws Exception{
         return userService.loginUserByPassword(loginDto);
     }
     
 //    CRUD MAPING
     @GetMapping
-    public List<User> getAllUser(){
+    public @ResponseBody List<User> getAllUser(){
         return userService.listAll();
     }
     
     @GetMapping("/{id}")
-    public User getOneUser(@PathVariable Integer id){
+    public @ResponseBody User getOneUser(@PathVariable Integer id){
         return userService.getOne(id);
     }
     
     @PostMapping
-    public UserDto createUser(@RequestBody UserDto user){
+    public @ResponseBody UserDto createUser(@RequestBody UserDto user){
         return userService.create(user);
     }
     
     @PutMapping("/{id}")
-    public UserDto updateUser(@PathVariable Integer id, @RequestBody UserDto user){
+    public @ResponseBody UserDto updateUser(@PathVariable Integer id, @RequestBody UserDto user){
         return userService.update(id, user);
     }
     

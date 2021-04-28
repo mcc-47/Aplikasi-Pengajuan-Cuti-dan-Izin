@@ -5,6 +5,7 @@
  */
 package com.mii.server.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -49,6 +50,8 @@ public class LeaveType implements Serializable {
     private int leaveDuration;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "leaveId")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Basic(optional = true)
     private Collection<Request> requestCollection;
 
     public LeaveType() {

@@ -5,6 +5,7 @@
  */
 package com.mii.server.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -45,6 +46,8 @@ public class Status implements Serializable {
     private String statusName;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Basic(optional = true)
     private Collection<ManagerFill> managerFillCollection;
 
     public Status() {

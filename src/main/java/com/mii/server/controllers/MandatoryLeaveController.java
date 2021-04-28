@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,22 +31,22 @@ public class MandatoryLeaveController {
     MandatoryLeaveService mandatoryLeaveService;
     
     @GetMapping
-    public List<MandatoryLeave> getAllMandatoryLeave(){
+    public @ResponseBody List<MandatoryLeave> getAllMandatoryLeave(){
         return mandatoryLeaveService.listAll();
     }
     
     @GetMapping("/{id}")
-    public MandatoryLeave getOneMandatoryLeave(@PathVariable Integer id){
+    public @ResponseBody MandatoryLeave getOneMandatoryLeave(@PathVariable Integer id){
         return mandatoryLeaveService.getOne(id);
     }
     
     @PostMapping
-    public MandatoryLeave createMandatoryLeave(@RequestBody MandatoryLeave mandatoryLeave){
+    public @ResponseBody MandatoryLeave createMandatoryLeave(@RequestBody MandatoryLeave mandatoryLeave){
         return mandatoryLeaveService.create(mandatoryLeave);
     }
     
     @PutMapping("/{id}")
-    public MandatoryLeave updateMandatoryLeave(@PathVariable Integer id, @RequestBody MandatoryLeave mandatoryLeave){
+    public @ResponseBody MandatoryLeave updateMandatoryLeave(@PathVariable Integer id, @RequestBody MandatoryLeave mandatoryLeave){
         return mandatoryLeaveService.update(id, mandatoryLeave);
     }
     

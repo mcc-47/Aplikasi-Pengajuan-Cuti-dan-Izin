@@ -90,6 +90,7 @@ public class Employee implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeId")
     @Basic(optional = true)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Request> requestCollection;
  
     public Employee() {
