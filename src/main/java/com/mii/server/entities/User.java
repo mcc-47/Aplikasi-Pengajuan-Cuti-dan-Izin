@@ -62,7 +62,7 @@ public class User implements UserDetails {
     @JoinTable(name = "users_roles", joinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")}, inverseJoinColumns = {
         @JoinColumn(name = "role_id", referencedColumnName = "role_id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Basic(optional = true)
     private Collection<Role> roleCollection;
