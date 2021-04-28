@@ -5,4 +5,4 @@ body   {background:#fff; height: 100%; margin: 0;}
 #main {background:#888; display: flex; height: calc( 100vh - 70px - 40px);}
 #left {background:#F9F5F4; width: 250px; align-items: center;}
 #right {padding: 25px; overflow: scroll; flex: 1 0 auto;}
-#foot  {background:#f88;}​
+/*#foot  {background:white;}​*/

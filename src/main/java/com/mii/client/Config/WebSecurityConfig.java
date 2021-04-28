@@ -26,13 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.
                 csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/dashboard").permitAll()
-<<<<<<< Updated upstream
-//                .antMatchers("/contact","/contact/**").hasAnyRole("ADMIN","USER")
-=======
-                .antMatchers("/holiday","/holiday/**").permitAll()
->>>>>>> Stashed changes
-//                .antMatchers("/dashboard").authenticated()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login").loginProcessingUrl("/login")

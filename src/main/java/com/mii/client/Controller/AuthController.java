@@ -60,21 +60,4 @@ public class AuthController {
         return "dashboard";
     }
 
-    @GetMapping("/logout")
-    public String fetchSignoutSite(HttpServletRequest request, HttpServletResponse response) {
-
-        HttpSession session = request.getSession(false);
-        SecurityContextHolder.clearContext();
-
-        session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-
-        for (Cookie cookie : request.getCookies()) {
-            cookie.setMaxAge(0);
-        }
-
-        return "redirect:/login?logout";
-    }
 }
