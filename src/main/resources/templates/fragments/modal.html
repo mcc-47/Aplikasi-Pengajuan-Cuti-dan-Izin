@@ -1,9 +1,17 @@
 <div th:fragment="modal">
+<<<<<<< Updated upstream
     <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
                     <h5 class="modal-title" id="exampleModalLabel">Contacts</h5>
+=======
+    <div class="modal fade" id="holidayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title" id="exampleModalLabel">Holiday Date</h5>
+>>>>>>> Stashed changes
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -11,6 +19,7 @@
                 <div class="modal-body">
                     <form id="formModal" name="myForm" action="#" method="post" class="needs-validation" novalidate>
                         <div class="form-group">
+<<<<<<< Updated upstream
                             <label for="phone">Phone</label>
                             <input type="tel" id="phone" name="phone" class="form-control" aria-describedby="phoneHelp" placeholder="Enter your phone number" required>
                             <small id="phoneHelp" class="form-text text-muted">Your information is safe with us.</small>
@@ -23,6 +32,20 @@
                             <input type="text" id="linkedin" name="linkedin" class="form-control" placeholder="Enter your LinkedIn" required>
                             <div class="invalid-feedback" style="font-size: 12">
                                 Please input your LinkedIn
+=======
+                            <label for="holidayName">Holiday Name</label>
+                            <input type="text" id="holidayDate" name="holidayDate" class="form-control" aria-describedby="holidayNameHelp" placeholder="Enter the Holiday Name" required>
+                            <!--<small id="phoneHelp" class="form-text text-muted">Your information is safe with us.</small>-->
+                            <div class="invalid-feedback" style="font-size: 12">
+                                Please input the Holiday Name
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="holidayDate">Holiday Date</label>
+                            <input type="date" id="holidayDate" name="linkedin" class="form-control" placeholder="Enter the Date" required>
+                            <div class="invalid-feedback" style="font-size: 12">
+                                Please input Date
+>>>>>>> Stashed changes
                             </div>
                         </div>
                         <div class="modal-footer border-top-0 d-flex justify-content-center">

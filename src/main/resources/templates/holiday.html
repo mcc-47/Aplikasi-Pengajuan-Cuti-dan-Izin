@@ -1,0 +1,47 @@
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head_link :: head_link">
+    <body>
+        <div th:replace="fragments/header :: header"></div>
+        <div id='main'>
+            <div th:replace="fragments/left :: left"></div>
+            <div id='right' style="background-size: cover; background-image: url('/css/images/wallpaperlogin.jpg')";>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="float-left">
+                                        <h3>Holiday Date</h3>
+                                    </div>
+                                    <div class="float-right">
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#holidayModal">
+                                            <i class="fa fa-plus"></i> Add New Holiday Date
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body p-4">
+                                    <table class="table w-100" id="holidayTable" style="margin-top: 2rem;">
+                                        <thead>
+                                            <tr>
+                                                <th>Holiday Id</th>
+                                                <th>Holiday Name</th>
+                                                <th>Holiday Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        <div th:replace="fragments/modal :: modal"></div>
+        <div th:replace="fragments/footer :: footer"></div>
+        <div th:replace="fragments/script :: script"></div>
+        
+    </body>
+</html>
