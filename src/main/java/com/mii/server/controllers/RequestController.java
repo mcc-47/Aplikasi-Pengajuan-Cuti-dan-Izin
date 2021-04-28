@@ -28,38 +28,32 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/request")
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class RequestController {
     
     @Autowired
     RequestService requestService;
     
 //    CRUD MAPING
-    @PreAuthorize("hasAnyAuthority('ADMINHR_READ','MANAGER_READ')")
     @GetMapping
     public @ResponseBody List<Request> getAllRequest(){
         return requestService.listAll();
     }
     
-    @PreAuthorize("hasAnyAuthority('EMPLOYEE_READ','MANAGER_READ')")
     @GetMapping("/{id}")
     public @ResponseBody Request getOneRequest(@PathVariable Integer id){
         return requestService.getOne(id);
     }
     
-    @PreAuthorize("hasAuthority('EMPLOYEE_CREATE')")
     @PostMapping
     public @ResponseBody Request createRequest(@RequestBody RequestDto request){
         return requestService.create(request);
     }
     
-    @PreAuthorize("hasAuthority('MANAGER_UPDATE')")
     @PutMapping("/{id}")
     public @ResponseBody Request updateRequest(@PathVariable Integer id, @RequestBody RequestDto request){
         return requestService.update(id, request);
     }
     
-    @PreAuthorize("hasAuthority('EMPLOYEE_DELETE')")
     @DeleteMapping("/{id}")
     public void deleteRequest(@PathVariable Integer id){
         requestService.delete(id);

@@ -27,38 +27,32 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/manager-fill")
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ManagerFillController {
     
     @Autowired
     ManagerFillService managerFillService;
     
     //    CRUD MAPING
-    @PreAuthorize("hasAnyAuthority('ADMINHR_READ','MANAGER_READ')")
     @GetMapping
     public @ResponseBody List<ManagerFill> getAllManagerFill(){
         return managerFillService.listAll();
     }
     
-    @PreAuthorize("hasAnyAuthority('EMPLOYEE_READ','MANAGER_READ')")
     @GetMapping("/{id}")
     public @ResponseBody ManagerFill getOneManagerFill(@PathVariable Integer id){
         return managerFillService.getOne(id);
     }
     
-    @PreAuthorize("hasAnyAuthority('EMPLOYEE_CREATE)")
     @PostMapping
     public @ResponseBody ManagerFill createManagerFill(@RequestBody ManagerFill managerFill){
         return managerFillService.create(managerFill);
     }
     
-    @PreAuthorize("hasAnyAuthority('MANAGER_UPDATE)")
     @PutMapping("/{id}")
     public @ResponseBody ManagerFill updateManagerFill(@PathVariable Integer id, @RequestBody ManagerFill managerFill){
         return managerFillService.update(id, managerFill);
     }
     
-    @PreAuthorize("hasAnyAuthority('EMPLOYEE_DELETE)")
     @DeleteMapping("/{id}")
     public void deleteManagerFill(@PathVariable Integer id){
         managerFillService.delete(id);

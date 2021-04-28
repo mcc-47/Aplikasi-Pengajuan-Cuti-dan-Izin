@@ -8,6 +8,7 @@ package com.mii.server.configurations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,6 +42,22 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/api/mandatory-leave","/api/holiday").hasRole("ADMINHR")
+                .antMatchers(HttpMethod.GET, "/api/employee").hasRole("ADMINHR")
+                .antMatchers(HttpMethod.GET, "/api/eployee/**").hasAnyRole("ADMINHR","MANAGER","EMPLOYEE")
+                .antMatchers(HttpMethod.POST, "/api/eployee").hasRole("ADMINHR")
+                .antMatchers(HttpMethod.PUT, "/api/eployee/**").hasAnyRole("ADMINHR","EMPLOYEE")
+                .antMatchers(HttpMethod.DELETE, "/api/eployee/**").hasRole("ADMINHR")
+                .antMatchers(HttpMethod.GET, "/api/request").hasAnyRole("ADMINHR","MANAGER")
+                .antMatchers(HttpMethod.GET, "/api/request/**").hasAnyRole("MANAGER","EMPLOYEE")
+                .antMatchers(HttpMethod.POST, "/api/request").hasRole("EMPLOYEE")
+                .antMatchers(HttpMethod.PUT, "/api/request/**").hasRole("MANAGER")
+                .antMatchers(HttpMethod.DELETE, "/api/request/**").hasAnyRole("ADMINHR","MANAGER","EMPLOYEE")
+                .antMatchers(HttpMethod.GET, "/api/mandatory-leave").hasAnyRole("ADMINHR","MANAGER")
+                .antMatchers(HttpMethod.GET, "/api/mandatory-leave/**").hasAnyRole("MANAGER","EMPLOYEE")
+                .antMatchers(HttpMethod.POST, "/api/mandatory-leave").hasRole("EMPLOYEE")
+                .antMatchers(HttpMethod.PUT, "/api/mandatory-leave/**").hasRole("MANAGER")
+                .antMatchers(HttpMethod.DELETE, "/api/mandatory-leave/**").hasAnyRole("ADMINHR","MANAGER","EMPLOYEE")
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/login").permitAll()
                 .and()
