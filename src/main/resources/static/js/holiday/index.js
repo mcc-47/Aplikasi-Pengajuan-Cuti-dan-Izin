@@ -1,18 +1,25 @@
 let holiday = new Object();
 let table = null;
-let id = 0;
 
 $(document).ready(() => {
+    
     getAll();
-    $("#formModal").submit((e) => {
+    
+    $("#createForm").submit(e => {
         e.preventDefault();
-        formValidation(this.id ? update : create);
+        validationForm(createHoliday);
     });
+    
+    $("#update").submit(e => {
+        e.preventDefault();
+        validationForm(updateHoliday);
+    });
+    
 });
 
 
 function getAll() {
-    table = $('#HolidayTable').DataTable({
+    table = $('#holidayTable').DataTable({
         filter: true,
         orderMulti: true,
         ajax: {
@@ -22,10 +29,10 @@ function getAll() {
         },
         columns: [
             {
-                data: "holidayId", name: "Holiday Id", autoWidth: true
+                data: "id", name: "Holiday Id", autoWidth: true
             },
             {
-                data: "holidayName", name: "Holiday", autoWidth: true
+                data: "name", name: "Holiday", autoWidth: true
             },
             {
                 data: "holidayDate", name: "Holiday Date", autoWidth: true
@@ -36,12 +43,13 @@ function getAll() {
                         <button 
                             class='btn btn-sm btn-primary'
                             data-toggle="modal" 
-                            data-target="#holidayModal" 
-                            onclick="getById('${row.holidayId}')"
-                        >
+                            data-target="#holidayEdit" 
+                            onclick="getById('${row.id}')">
                             <i class='fa fa-sm fa-pencil'></i>
                         </button>
-                        <button class='btn btn-sm btn-danger' onclick='deleteById(${row.holidayId})'>
+                        <button 
+                            class='btn btn-sm btn-danger' 
+                            onclick='onClickDelete(${row.id})'>
                             <i class='fa fa-sm fa-trash'></i>
                         </button>
                     `;
@@ -51,126 +59,91 @@ function getAll() {
     });
 }
 
+
+//GET BY ID
 function getById(id) {
-    this.id = id;
+    console.log(id);
     $.ajax({
         url: `/holiday/${id}`,
         type: 'GET',
         success: (res) => {
+            console.log(res);
             setForm(res);
         }
-    });
+    }); 
 }
 
-function create() {
-    contact = {
-        holidayId: $("#holidayId").val(),
-        holidayName: $("#holidayName").val(),
+function setForm(hdy) {
+    $("#idU").val(hdy.id);
+    $("#nameU").val(hdy.name);
+    $("#holidayDateU").val(moment(hdy.holidayDate).format('YYYY[-]MM[-]DD'));
+}
+
+//CREATE EMPLOYEE
+function createHoliday() {
+    holiday = {
+        name: $("#name").val(),
         holidayDate: $("#holidayDate").val()
     };
-
+    console.log(holiday);
+    
     $.ajax({
-        url: "/holiday",
+        url: `/holiday`,
         type: 'POST',
-        contentType: 'application/json',
         data: JSON.stringify(holiday),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         success: (res) => {
+            createSuccessAlert();
+            console.log("Success");
             table.ajax.reload();
-            successAlert("Date Added");
             $("#holidayModal").modal("hide");
+            document.getElementById("createForm").reset();
         },
-        error: (err) => {
-            errorAlert("Date is Failed to Added");
+        error: function (err) {
+            errorAlert();
         }
     });
 }
 
-function update(id) {
-    contact = {
-        holidayId: $("#holidayId").val(),
-        holidayName: $("#holidayName").val(),
-        holidayDate: $("#holidayDate").val()
+//UPDATE EMPLOYEE
+function updateHoliday(){
+    holiday = {
+        id: $("#idU").val(),
+        name: $("#nameU").val(),
+        holidayDate: $("#holidayDateU").val()
     };
-
+    console.log(holiday);
+    
     $.ajax({
-        url: `/holiday/${this.id}`,
+        url: `/holiday/${holiday.id}`,
         type: 'PUT',
-        contentType: 'application/json',
         data: JSON.stringify(holiday),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: (res) => {
+            console.log("Success");
+            table.ajax.reload();
+            updateSuccessAlert();
+            $("#holidayEdit").modal("hide");
+        },
+        error: function (err) {
+            errorAlert();
+        }
+    });
+}
+
+//DELETE EMPLOYEE
+function deleteHoliday(id) {
+    $.ajax({
+        url: `/holiday/${id}`,
+        type: 'DELETE',
         success: (res) => {
             table.ajax.reload();
-            successAlert("Date Updated");
-            $("#holidayModal").modal("hide");
+            deleteSuccessAlert();
         },
-        error: (err) => {
-            errorAlert("Date is Failed to Updated");
+        error: function (err) {
+            errorAlert();
         }
     });
 }
-
-function deleteById(id) {
-    questionAlert("Are you sure?", "Do you want to delete this data?", () => {
-        $.ajax({
-            url: `/holiday/${this.id}`,
-            type: 'DELETE',
-            success: (res) => {
-                successAlert("Date Deleted");
-            }
-        });
-    });
-}
-
-function setForm(data) {
-    $("#holidayId").val(data.contactId);
-    $("#holidayName").val(data.holidayName);
-    $("#holidayDate").val(data.holidayDate);
-}
-
-//Clear form after edit the data
-function clearForm() {
-    idHoliday = 0;
-    $("#holidayId").val("");
-    $("#holidayName").val("");
-    $("#holidayDate").val("");
-}
-
-$(document).ready(function () {
-    $("#loginForm").click(function () { // hides all element H1
-        var username = $("#username").val();
-        var password = $("#password").val();
-
-        if (username == '' || password == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: '<a href>Why do I have this issue?</a>'
-            })
-        } else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Okay',
-                text: 'Login Success',
-                footer: '<a href>Why do I have this issue?</a>'
-            })
-        }
-    });
-});
-
-$(document).ready(function () {
-    $("#logoutButton").on("click", function () {
-        Swal.fire({
-            title: 'Are you sure to logout?',
-            text: "You have to log in again!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, I am sure!'
-        }).then((result) => {
-            if (result.value === true) {
-                $('#logoutform').submit();
-            }
-        });
-    });
-});

@@ -11,11 +11,14 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="float-left">
-                                        <h3>Holiday Date</h3>
+                                        <h2>Holiday Date</h2>
                                     </div>
                                     <div class="float-right">
-                                        <button class="btn btn-success" data-toggle="modal" data-target="#holidayModal">
-                                            <i class="fa fa-plus"></i> Add New Holiday Date
+                                        <button class="btn btn-success btn-sm"
+                                                data-toggle="modal" 
+                                                data-target="#holidayModal">
+                                            <i class="fa fa-plus"></i>
+                                            Add New Holiday Date
                                         </button>
                                     </div>
                                 </div>
@@ -26,22 +29,21 @@
                                                 <th>Holiday Id</th>
                                                 <th>Holiday Name</th>
                                                 <th>Holiday Date</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         </tbody>
                                     </table>
+                                    <div th:replace="adminhr/holiday-create :: modal"></div>
+                                    <div th:replace="adminhr/holiday-update :: modalU"></div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>   
-        <div th:replace="fragments/modal :: modal"></div>
-        <div th:replace="fragments/footer :: footer"></div>
-        <div th:replace="fragments/script :: script"></div>
-        
+        <div th:replace="fragments/footer :: footer"></div>    
     </body>
 </html>

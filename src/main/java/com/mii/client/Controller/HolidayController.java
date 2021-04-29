@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Fadel
  */
 @Controller
-@RequestMapping("holiday")
+@RequestMapping("/holiday")
 public class HolidayController {
     
     @Autowired
@@ -33,9 +33,9 @@ public class HolidayController {
     
     @GetMapping
     public String getAll(Model model) {
-//        model.addAttribute("holiday", holidayService.getAll());
+        model.addAttribute("holiday", holidayService.getAll());
         System.out.println("holiday page");
-        return "holiday";
+        return "adminhr/holiday";
     }
     
     @GetMapping("/get-all")
@@ -63,8 +63,9 @@ public class HolidayController {
     }
 
     @DeleteMapping("/{id}")
-    public Holiday delete(@PathVariable("id") Integer id) {
-        return holidayService.delete(id);
+    public @ResponseBody Integer delete(@PathVariable("id") Integer id) {
+        holidayService.delete(id);
+        return id;
     }
     
 }

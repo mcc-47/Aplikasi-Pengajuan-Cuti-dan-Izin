@@ -14,13 +14,18 @@ import lombok.Data;
 @Data
 public class Holiday {
     
-    private Integer holidayId;
-    private String holidayName;
+    private Integer id;
+    private String name;
     private Date holidayDate;
 
-    public Holiday(Integer holidayId, String holidayName, Date holidayDate) {
-        this.holidayId = holidayId;
-        this.holidayName = holidayName;
+    public Holiday(Integer id, String name, Date holidayDate) {
+        this.id = id;
+        this.name = name;
+        this.holidayDate = holidayDate;
+    }
+
+    public Holiday(String name, Date holidayDate) {
+        this.name = name;
         this.holidayDate = holidayDate;
     }
 

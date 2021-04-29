@@ -1,62 +1,117 @@
-$(document).ready(function () {
-    'use strict';
-    window.addEventListener('load', function () {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function (form) {
-            form.addEventListener('submit', function (event) {
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-    }, false);
+
+$(document).ready(() => {
+    $("#loginForm").submit(e => {
+        e.preventDefault();
+//        login();
+        validationForm(login);
+    });
+    
 });
-$(document).ready(function () {
-    $("#loginForm").click(function () { // hides all element H1
-        var username = $("#username").val();
-        var password = $("#password").val();
 
-        if (username == '' || password == '') {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-
-            Toast.fire({
-                icon: 'error',
-                title: 'Signed in unsuccessfully'
-            })
-        } else {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-
-            Toast.fire({
-                icon: 'success',
-                title: 'Signed in successfully'
-            })
+//LOGIN BUTTON
+function login() {
+    auth = {
+        username: $("#username").val(),
+        password: $("#password").val()
+    };
+    console.log(auth);
+    
+    $.ajax({
+        url: `/login`,
+        type: 'POST',
+        data: JSON.stringify(auth),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: (res) => {
+            console.log(res);
+            if (res===true) {
+            loginSuccess();
+            console.log("Success");
+            window.location.replace("/dashboard");
+            } else {
+            errorAlert();
+            window.location.replace("/login?error");
+            }
+        },
+        error: function (err) {
+            errorAlert();
+            window.location.replace("/login?error");
         }
     });
+}
+
+
+//LOGIN SUCCESS
+function loginSuccess(){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: 'Signed In successfully'
+    })
+}
+
+// ERROR
+function errorAlert(){
+    const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+                })
+    Toast.fire({
+        icon: 'error',
+        title: 'failed'
+    })
+}
+
+//LOGOUT BUTTON
+$(document).ready(function () {
+    $("#logoutButton").on("click", function () {
+        Swal.fire({
+        position : 'top-end',
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText:'Log out'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed Out successfully'
+                })
+                $('#logoutform').submit();
+            }
+        });
+    });
 });
-
-
-

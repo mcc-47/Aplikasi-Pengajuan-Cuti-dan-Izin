@@ -1,0 +1,63 @@
+<div th:fragment="modalU">
+    <div class="modal fade" id="holidayEdit" tabindex="-1" role="dialog" 
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitleEdit">Holiday</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" id="update" 
+                          class="needs-validation" novalidate>           
+                        <table  style="padding: 10">
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>Holiday ID</label></td>
+                                    <td><input type="number" name="id" 
+                                               class="form-control" required
+                                               id="idU" readonly="readonly">
+                                    <div class="invalid-feedback">
+                                        This field is required.
+                                    </div></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>Holiday Name</label></td>
+                                    <td><input type="text" name="name" 
+                                               class="form-control" required
+                                               id="nameU" >
+                                    <div class="invalid-feedback">
+                                        This field is required.
+                                    </div></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>Holiday Date</label></td>
+                                    <td><input type="date" class="form-control" 
+                                               id="holidayDateU"  
+                                               name="holidayDate" required>
+                                    <div class="invalid-feedback">
+                                        This field is required.
+                                    </div></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value="Submit" 
+                                           class="btn btn-primary">
+                                </td>
+                                <td><input type="reset" value="Reset" 
+                                           class="btn btn-secondary">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

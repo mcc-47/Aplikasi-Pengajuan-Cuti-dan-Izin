@@ -20,6 +20,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -38,25 +40,29 @@ public class AuthController {
             /* The user is logged in :) */
             return "redirect:/dashboard";
         }
+        
         AuthRequest auth = new AuthRequest();
         model.addAttribute("auth", auth);
         return "login";
     }
-
+    
     @PostMapping("/login")
-    public String loginProcess(@ModelAttribute("auth") AuthRequest auth) {
+    public @ResponseBody boolean loginProcess(@RequestBody AuthRequest auth) {
         String redirectUrl = "";
-
+        boolean res = false;
+        
         if (authService.loginProcess(auth)) {
             redirectUrl = "redirect:/dashboard";
+            res = true;
         } else {
             redirectUrl = "redirect:/login?error";
         }
-        return redirectUrl;
+        
+        return res;
     }
     
     @GetMapping("/dashboard")
-    public String dashboard() {
+    public String dashborad() {
         return "dashboard";
     }
 

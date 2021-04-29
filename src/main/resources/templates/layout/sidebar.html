@@ -1,9 +1,0 @@
-<div class="sidenav  " style="font-family: Grava" th:fragment="sidebar">
-
-    <div th:class="${#strings.contains(#httpServletRequest.requestURI,'/district')} ? 'active' :''" sec:authorize="hasRole('ADMIN')">
-        <a th:href="@{/district}" class="menu-link"><i class="fas fa-city mr-2"></i><span style="padding-left: 2px;float: right">Districts</span></a>
-    </div>
-    <div  th:class="${#strings.contains(#httpServletRequest.requestURI,'/province')} ? 'active' :''">
-        <a th:href="@{/province}" ><i class="fas fa-monument"></i><span style="padding-left: 8px">Provinces</span></a>
-    </div>
-</div>
