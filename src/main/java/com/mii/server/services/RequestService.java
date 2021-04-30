@@ -39,6 +39,10 @@ public class RequestService {
         return requestRepository.findById(id).get();
     }
     
+    public List<Request> getByEmployeeId(Employee employeeId){
+        return requestRepository.findByEmployeeId(employeeId);
+    }
+    
     public Request create(RequestDto request){
         List<Request> reqs = listAll();
         int i = 0;

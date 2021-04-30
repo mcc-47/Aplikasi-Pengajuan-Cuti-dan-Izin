@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jakab
  */
 @RestController
-@RequestMapping("/api/manager-fill")
+@RequestMapping("/api/manager")
 public class ManagerFillController {
     
     @Autowired

@@ -75,7 +75,7 @@ public class LeaveType implements Serializable {
         this.leaveId = leaveId;
     }
 
-    public String getLevaeName() {
+    public String getLeaveName() {
         return levaeName;
     }
 

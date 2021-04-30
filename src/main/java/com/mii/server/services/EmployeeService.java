@@ -7,6 +7,7 @@ package com.mii.server.services;
 
 import com.mii.server.dto.EmployeeDto;
 import com.mii.server.entities.Employee;
+import com.mii.server.entities.User;
 import com.mii.server.repositories.EmployeeRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,9 @@ public class EmployeeService {
     
     @Autowired
     EmployeeRepository employeeRepository;
+    
+    @Autowired
+    UserService userService;
     
     public List<EmployeeDto> listAll(){
         List<EmployeeDto> emps = new ArrayList<>();
@@ -45,6 +49,23 @@ public class EmployeeService {
     public EmployeeDto getOneById(Integer id){
         Employee emp = employeeRepository.findById(id).get();
         System.out.println("get one employee");
+        return new EmployeeDto(
+                emp.getEmployeeId(), 
+                emp.getEmployeeName(), 
+                emp.getGender(), 
+                emp.getReligion(), 
+                emp.getEmail(), 
+                emp.getJobTitle(), 
+                emp.getTotalLeave(), 
+                emp.getEntryDate(), 
+                emp.getDischargeDate(), 
+                emp.getManagerId().getEmployeeId());
+    }
+    
+    public EmployeeDto getOneByUsername(String username){
+        User user = userService.loadUserByUsername(username);
+        Employee emp = employeeRepository.findById(user.getUserId()).get();
+        System.out.println("get one employee by username");
         return new EmployeeDto(
                 emp.getEmployeeId(), 
                 emp.getEmployeeName(), 

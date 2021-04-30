@@ -6,12 +6,11 @@
 package com.mii.server.controllers;
 
 import com.mii.server.dto.RequestDto;
+import com.mii.server.entities.Employee;
 import com.mii.server.entities.Request;
 import com.mii.server.services.RequestService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +41,11 @@ public class RequestController {
     @GetMapping("/{id}")
     public @ResponseBody Request getOneRequest(@PathVariable Integer id){
         return requestService.getOne(id);
+    }
+    
+    @PostMapping("/by-employeeId")
+    public @ResponseBody List<Request> getOneRequest(@RequestBody Employee employeeId){
+        return requestService.getByEmployeeId(employeeId);
     }
     
     @PostMapping
