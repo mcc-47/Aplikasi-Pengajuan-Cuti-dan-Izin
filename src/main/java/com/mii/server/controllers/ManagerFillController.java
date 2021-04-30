@@ -5,6 +5,8 @@
  */
 package com.mii.server.controllers;
 
+import com.mii.server.dto.RequesterListDto;
+import com.mii.server.entities.Employee;
 import com.mii.server.entities.ManagerFill;
 import com.mii.server.services.ManagerFillService;
 import java.util.List;
@@ -41,6 +43,11 @@ public class ManagerFillController {
     @GetMapping("/{id}")
     public @ResponseBody ManagerFill getOneManagerFill(@PathVariable Integer id){
         return managerFillService.getOne(id);
+    }
+    
+    @PostMapping("/by-managerId")
+    public @ResponseBody List<RequesterListDto> getAllByManagerId(@RequestBody Employee employeeId){
+        return managerFillService.getByManagerId(employeeId.getEmployeeId());
     }
     
     @PostMapping

@@ -5,8 +5,10 @@
  */
 package com.mii.server.services;
 
+import com.mii.server.dto.RequesterListDto;
 import com.mii.server.entities.ManagerFill;
 import com.mii.server.repositories.ManagerFillRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,22 @@ public class ManagerFillService {
     
     public ManagerFill getOne(Integer id){
         return managerFillRepository.findById(id).get();
+    }
+    
+    public List<RequesterListDto> getByManagerId(Integer managerId){
+        List<ManagerFill> mgrFill = managerFillRepository.findByManagerId(managerId);
+        List<RequesterListDto> reqListDto = new ArrayList<>();
+        for (ManagerFill managerFill : mgrFill) {
+            reqListDto.add(new RequesterListDto(
+                    managerFill.getReqId(), 
+                    managerFill.getRequest().getEmployeeId().getEmployeeName(), 
+                    managerFill.getRequest().getLeaveId().getLeaveName(), 
+                    managerFill.getRequest().getStartDate(), 
+                    managerFill.getRequest().getLeaveId().getLeaveDuration(), 
+                    managerFill.getRequest().getReasons(), 
+                    managerFill.getStatusId().getStatusName()));
+        }
+        return reqListDto;
     }
     
     public ManagerFill create(ManagerFill managerFill){

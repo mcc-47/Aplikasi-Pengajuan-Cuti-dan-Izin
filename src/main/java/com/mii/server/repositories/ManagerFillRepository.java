@@ -6,6 +6,7 @@
 package com.mii.server.repositories;
 
 import com.mii.server.entities.ManagerFill;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ManagerFillRepository extends JpaRepository<ManagerFill, Integer>{
+    
+    public List<ManagerFill> findByManagerId(Integer managerId);
     
 }
