@@ -30,7 +30,7 @@ public class HolidayService {
     @Value("${api.url}/api/holiday")
     private String url;
     
-     public List<Holiday> getAll() {
+    public List<Holiday> getAll() {
         ResponseEntity<List<Holiday>> response = restTemplate
                 .exchange(url, HttpMethod.GET, new HttpEntity<>(RequestFormat.createHeaders()),
                         new ParameterizedTypeReference<List<Holiday>>() {

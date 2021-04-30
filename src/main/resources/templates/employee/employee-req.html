@@ -1,0 +1,55 @@
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head_link :: head_link">
+    <body>
+        <div th:replace="fragments/header :: header"></div>
+        <div id='main'>
+            <div th:replace="fragments/left :: left"></div>
+            <div id='right' style="background-image: url('/css/images/wallpaperlogin.jpg'); background-size: 100% 100%;">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header px-3">
+                                    <div class="float-left">
+                                        <h2>Your Request List</h2>
+                                    </div>
+                                    <div class="float-right">
+                                        <button class="btn btn-success btn-sm"
+                                                data-toggle="modal" 
+                                                data-target="#requestEmp">
+                                            <i class="fa fa-plus"></i>
+                                            Request Leave
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body p-4">
+                                    <table class="table w-100" id="reqListTab" style="margin-top: 2rem;">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Request Type</th>
+                                                <th>Duration</th>
+                                                <th>Start Date</th>
+                                                <th>Reasons</th>
+                                                <th>Manager</th>
+                                                <th>Status</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <div th:replace="employee/employee-req-create :: leavereq"></div>
+                                    <div th:replace="employee/employee-req-details :: modalE"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer"></div>
+    </body>
+</html>

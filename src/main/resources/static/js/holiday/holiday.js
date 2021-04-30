@@ -1,8 +1,10 @@
+
+
 let holiday = new Object();
-let table = null;
+let tableHol = null;
 
 $(document).ready(() => {
-    
+    console.log("di holiday");
     getAll();
     
     $("#createForm").submit(e => {
@@ -10,7 +12,7 @@ $(document).ready(() => {
         validationForm(createHoliday);
     });
     
-    $("#update").submit(e => {
+    $("#updateHol").submit(e => {
         e.preventDefault();
         validationForm(updateHoliday);
     });
@@ -19,7 +21,7 @@ $(document).ready(() => {
 
 
 function getAll() {
-    table = $('#holidayTable').DataTable({
+    tableHol = $('#holidayTable').DataTable({
         filter: true,
         orderMulti: true,
         ajax: {
@@ -49,7 +51,7 @@ function getAll() {
                         </button>
                         <button 
                             class='btn btn-sm btn-danger' 
-                            onclick='onClickDelete(${row.id})'>
+                            onclick='onClickDeleteH(${row.id})'>
                             <i class='fa fa-sm fa-trash'></i>
                         </button>
                     `;
@@ -68,12 +70,12 @@ function getById(id) {
         type: 'GET',
         success: (res) => {
             console.log(res);
-            setForm(res);
+            setFormH(res);
         }
     }); 
 }
 
-function setForm(hdy) {
+function setFormH(hdy) {
     $("#idU").val(hdy.id);
     $("#nameU").val(hdy.name);
     $("#holidayDateU").val(moment(hdy.holidayDate).format('YYYY[-]MM[-]DD'));
@@ -96,7 +98,7 @@ function createHoliday() {
         success: (res) => {
             createSuccessAlert();
             console.log("Success");
-            table.ajax.reload();
+            tableHol.ajax.reload();
             $("#holidayModal").modal("hide");
             document.getElementById("createForm").reset();
         },
@@ -123,7 +125,7 @@ function updateHoliday(){
         dataType: "json",
         success: (res) => {
             console.log("Success");
-            table.ajax.reload();
+            tableHol.ajax.reload();
             updateSuccessAlert();
             $("#holidayEdit").modal("hide");
         },
@@ -139,11 +141,28 @@ function deleteHoliday(id) {
         url: `/holiday/${id}`,
         type: 'DELETE',
         success: (res) => {
-            table.ajax.reload();
+            tableHol.ajax.reload();
             deleteSuccessAlert();
         },
         error: function (err) {
             errorAlert();
         }
     });
+}
+
+//DELETE BUTTON
+function onClickDeleteH(id){
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText:'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteHoliday(id);
+                }
+        });
 }

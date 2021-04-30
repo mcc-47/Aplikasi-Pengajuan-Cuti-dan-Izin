@@ -1,8 +1,8 @@
 
+
 $(document).ready(() => {
     $("#loginForm").submit(e => {
         e.preventDefault();
-//        login();
         validationForm(login);
     });
     

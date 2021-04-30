@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mii.client.Models;
+package com.mii.client.Dto;
 
 import java.util.Date;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.Data;
  * @author jakab
  */
 @Data
-public class Employee {
+public class EmployeeProfile {
     
     private Integer employeeId;
     private String employeeName;
@@ -24,16 +24,12 @@ public class Employee {
     private Integer totalLeave;
     private Date entryDate;
     private Date dischargeDate;
-    private Integer managerId;
+    private String managerId;
 
-    public Employee() {
+    public EmployeeProfile() {
     }
 
-    public Employee(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public Employee(String employeeName, String gender, String religion, String email, String jobTitle, Integer totalLeave, Date entryDate, Date dischargeDate, Integer managerId) {
+    public EmployeeProfile(String employeeName, String gender, String religion, String email, String jobTitle, Integer totalLeave, Date entryDate, String managerId) {
         this.employeeName = employeeName;
         this.gender = gender;
         this.religion = religion;
@@ -41,11 +37,10 @@ public class Employee {
         this.jobTitle = jobTitle;
         this.totalLeave = totalLeave;
         this.entryDate = entryDate;
-        this.dischargeDate = dischargeDate;
         this.managerId = managerId;
     }
 
-    public Employee(Integer employeeId, String employeeName, String gender, String religion, String email, String jobTitle, Integer totalLeave, Date entryDate, Date dischargeDate, Integer managerId) {
+    public EmployeeProfile(Integer employeeId, String employeeName, String gender, String religion, String email, String jobTitle, Integer totalLeave, Date entryDate, String managerId) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.gender = gender;
@@ -54,7 +49,6 @@ public class Employee {
         this.jobTitle = jobTitle;
         this.totalLeave = totalLeave;
         this.entryDate = entryDate;
-        this.dischargeDate = dischargeDate;
         this.managerId = managerId;
     }
     

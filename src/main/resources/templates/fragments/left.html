@@ -2,7 +2,16 @@
     <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/dashboard')} ? 'dropdown-item active' : 'dropdown-item'" style="font-size: 20; padding: 10px 30px;" th:href="@{/dashboard}">
         <i class="fa fa-home"></i>
         Home</a>
+    <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/request')} ? 'dropdown-item active' : 'dropdown-item'" style="font-size: 20; padding: 10px 30px;" th:href="@{/request}">
+        <i class="fa fa-list"></i>
+        Leave Request</a>
+    <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/manager')} ? 'dropdown-item active' : 'dropdown-item'" style="font-size: 20; padding: 10px 30px;" th:href="@{/manager}">
+        <i class="fa fa-list"></i>
+        Request Approval</a>
     <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/holiday')} ? 'dropdown-item active' : 'dropdown-item'" style="font-size: 20; padding: 10px 30px;" th:href="@{/holiday}">
         <i class="fa fa-users"></i>
-        holiday</a>
+        Holiday</a>
+    <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/mandatory-leave')} ? 'dropdown-item active' : 'dropdown-item'" style="font-size: 20; padding: 10px 30px;" th:href="@{/mandatory-leave}">
+        <i class="fa fa-users"></i>
+        Mandatory Leave</a>
 </div>

@@ -5,13 +5,20 @@
  */
 package com.mii.client.Controller;
 
-import com.mii.client.Dto.EmployeeProfile;
-import com.mii.client.Models.AuthRequest;
-import com.mii.client.Models.Employee;
-import com.mii.client.Service.EmployeeService;
+/**
+ *
+ * @author jakab
+ */
+
+import com.mii.client.Dto.ApprovalResult;
+import com.mii.client.Dto.RequesterList;
+import com.mii.client.Models.ManagerFill;
+import com.mii.client.Service.ManagerService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,33 +32,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author MyLaptop
  */
 @Controller
-@RequestMapping("employee")
-public class EmployeeController {
+@RequestMapping("manager")
+public class ManagerController {
     
     @Autowired
-    EmployeeService employeeService;
+    ManagerService managerService;
     
-    @GetMapping("/profile")
+    @GetMapping
     public String getAll(Model model) {
-        System.out.println("profile page");
-        return "employee/profile";
+//        model.addAttribute("manager", managerService.getAll());
+        return "manager/manager";
     }
     
-    @GetMapping("/{id}")
+    @GetMapping("/by-mgrId")
     public @ResponseBody
-    Employee getById(@PathVariable("id") Integer id) {
-        return employeeService.getEmployee(id);
+    List<RequesterList> getAllProcess() {
+        return managerService.getAllByMgrId();
     }
 
-    @PostMapping("/by-username")
+    @GetMapping("/{id}")
     public @ResponseBody
-    EmployeeProfile getByUsername(@RequestBody AuthRequest auth) {
-        return employeeService.getByUsername(auth);
+    ManagerFill getById(@PathVariable("id") Integer id) {
+        return managerService.getById(id);
     }
-    
-//    @PutMapping("/{id}")
-//    public @ResponseBody
-//    Employee update(@PathVariable("id") Integer id, @RequestBody Employee employee) {
-//        return employeeService.updateById(id, employee);
-//    }
+
+    @PutMapping("/{id}")
+    public @ResponseBody
+    ManagerFill update(@PathVariable("id") Integer id, @RequestBody ApprovalResult approval) {
+        System.out.println(approval);
+        return managerService.updateApproval(id, approval);
+    }
+
 }

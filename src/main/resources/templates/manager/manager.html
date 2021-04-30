@@ -1,0 +1,50 @@
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head_link :: head_link">
+    <body>
+        <div th:replace="fragments/header :: header"></div>
+        <div id='main'>
+            <div th:replace="fragments/left :: left"></div>
+            <div id='right' style="background-size: cover; background-image: url('/css/images/wallpaperlogin.jpg')";>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="float-left">
+                                        <h2>Manager Approval List</h2>
+                                    </div>
+                                    <div class="float-right">
+                                    </div>
+                                </div>
+                                <div class="card-body p-4">
+                                    <table class="table w-100" id="managerTest" style="margin-top: 2rem;">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Employee</th>
+                                                <th>Leave Type</th>
+                                                <th>Start Date</th>
+                                                <th>Duration</th>
+                                                <th>Reasons</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <div th:replace="manager/manager-update :: modalM"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        <div th:replace="fragments/footer :: footer"></div>
+<!--        <script>
+            $(document).ready(function () {
+                var table = $('#managerTable').DataTable();
+            });
+        </script>-->
+    </body>
+</html>

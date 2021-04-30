@@ -1,0 +1,55 @@
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head_link :: head_link">
+    <body>
+        <div th:replace="fragments/header :: header"></div>
+        <div id='main'>
+            <div th:replace="fragments/left :: left"></div>
+            <div id='right' style="background-size: cover; background-image: url('/css/images/wallpaperlogin.jpg')";>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="float-left">
+                                        <h2>Mandatory Leave Date</h2>
+                                    </div>
+                                    <div class="float-right">
+                                        <button class="btn btn-success btn-sm"
+                                                data-toggle="modal" 
+                                                data-target="#mandatoryLeaveModal">
+                                            <i class="fa fa-plus"></i>
+                                            Add New Mandatory Leave Date
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body p-4">
+                                    <table class="table w-100" id="mandatoryTest" style="margin-top: 2rem;">
+                                        <thead>
+                                            <tr>
+                                                <th>Mandatory Leave Id</th>
+                                                <th>Name</th>
+                                                <th>Mandatory Leave Date</th>
+                                                <th>Duration</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <div th:replace="adminhr/mandatory-leave-create :: modalmanlev"></div>
+                                    <div th:replace="adminhr/mandatory-leave-update :: modalmanlevU"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        <div th:replace="fragments/footer :: footer"></div>
+        <script>
+            $(document).ready(function () {
+                var table = $('#mandatoryLeaveTable').DataTable();
+            });
+        </script>
+    </body>
+</html>
