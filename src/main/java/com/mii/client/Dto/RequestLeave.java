@@ -18,6 +18,7 @@ public class RequestLeave {
     private Integer reqId;
     private Integer employeeId;
     private Integer leaveId;
+    private Integer leaveDuration;
     private String reasons;
     private Date startDate;
 

@@ -87,6 +87,7 @@ function setRequestForm(mdl) {
 function createRequest() {
     request = {
         leaveId: $("#reqType").val(),
+        leaveDuration: $("#leaveDuration").val(),
         reasons: $("#reasons").val(),
         startDate: $("#startDate").val()
     };
@@ -116,14 +117,14 @@ function setDuration(){
     if( document.getElementById("reqType").value === "1" ) {
         $("#leaveDuration").val(1);
         $("#leaveDuration").removeAttr('readonly');
-        $("#leaveDuration").attr('max', '7');
+        $("#leaveDuration").attr('max', '3');
         $("#leaveDuration").attr('min', '1');
         console.log("oke masuk if isinya 1");
         }
     if( document.getElementById("reqType").value === "2" ) {
         $("#leaveDuration").val(1);
         $("#leaveDuration").removeAttr('readonly');
-        $("#leaveDuration").attr('max', '12');
+        $("#leaveDuration").attr('max', '5');
         $("#leaveDuration").attr('min', '1');
         console.log("oke masuk if isinya 2");
         }

@@ -52,8 +52,8 @@ public class RequestService {
         for (Request req : response.getBody()) {
             reqList.add(new RequestList(
                     req.getReqId(), 
-                    req.getLeaveId().getLeaveName(), 
-                    req.getLeaveId().getLeaveDuration(), 
+                    req.getLeaveId().getLevaeName(), 
+                    req.getLeaveDuration(), 
                     req.getStartDate(), 
                     req.getReasons(), 
                     employeeService.getEmployee(req.getManagerFill().getManagerId()).getEmployeeName(), 
