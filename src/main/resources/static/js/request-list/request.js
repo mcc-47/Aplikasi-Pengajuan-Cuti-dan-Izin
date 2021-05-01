@@ -12,6 +12,7 @@ $(document).ready(() => {
         validationForm(createRequest);
     });
     
+    
 });
 
 
@@ -108,4 +109,62 @@ function createRequest() {
             errorAlert();
         }
     });
+}
+
+function setDuration(){
+    console.log("masuk fungsi");
+    if( document.getElementById("reqType").value === "1" ) {
+        $("#leaveDuration").val(1);
+        $("#leaveDuration").removeAttr('readonly');
+        $("#leaveDuration").attr('max', '7');
+        $("#leaveDuration").attr('min', '1');
+        console.log("oke masuk if isinya 1");
+        }
+    if( document.getElementById("reqType").value === "2" ) {
+        $("#leaveDuration").val(1);
+        $("#leaveDuration").removeAttr('readonly');
+        $("#leaveDuration").attr('max', '12');
+        $("#leaveDuration").attr('min', '1');
+        console.log("oke masuk if isinya 2");
+        }
+    if( document.getElementById("reqType").value === "3" ) {
+        $("#leaveDuration").val(90);
+        $("#leaveDuration").attr('readonly', true);
+        console.log("oke masuk if isinya 3");
+        }
+    if( document.getElementById("reqType").value === "4" ) {
+        $("#leaveDuration").val(3);
+        $("#leaveDuration").attr('readonly', true);
+        console.log("oke masuk if isinya 4");
+        }
+    if( document.getElementById("reqType").value === "5" ) {
+        $("#leaveDuration").val(30);
+        $("#leaveDuration").attr('readonly', true);
+        console.log("oke masuk if isinya 5");
+        }
+    if( document.getElementById("reqType").value === "6" ) {
+        $("#leaveDuration").val(2);
+        $("#leaveDuration").attr('readonly', true);
+        console.log("oke masuk if isinya 6");
+        }
+    if( document.getElementById("reqType").value === "7" ) {
+        $("#leaveDuration").val(2);
+        $("#leaveDuration").attr('readonly', true);
+        console.log("oke masuk if isinya 7");
+        }
+    
+}
+
+function setLeaveValidation(){
+    
+    $("#cutiMelahirkan").removeAttr('hidden');
+    $("#cutiHaji").removeAttr('hidden');
+    setDuration();
+    if (validasiProfil.gender === "Male") {
+        $("#cutiMelahirkan").attr('hidden', true);
+    }
+    if (validasiProfil.religion !== "Islam") {
+        $("#cutiHaji").attr('hidden', true);
+    }
+    
 }

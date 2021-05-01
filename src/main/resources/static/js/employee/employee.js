@@ -1,5 +1,5 @@
 
-
+let validasiProfil = new Object();
 let auth = new Object();
 
 $(document).ready(() => {
@@ -23,6 +23,12 @@ function getByUsername() {
         dataType: "json",
         success: (res) => {
             console.log(res);
+            validasiProfil = {
+                gender: res.gender,
+                religion: res.religion,
+                totalLeave: res.totalLeave,
+            };
+            console.log(validasiProfil);
             setFormP(res);
         },
         error: function (err) {
