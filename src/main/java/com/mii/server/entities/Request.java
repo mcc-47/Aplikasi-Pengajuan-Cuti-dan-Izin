@@ -5,15 +5,12 @@
  */
 package com.mii.server.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -36,15 +33,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Request.findAll", query = "SELECT r FROM Request r")
     , @NamedQuery(name = "Request.findByReqId", query = "SELECT r FROM Request r WHERE r.reqId = :reqId")
+    , @NamedQuery(name = "Request.findByLeaveDuration", query = "SELECT r FROM Request r WHERE r.leaveDuration = :leaveDuration")
     , @NamedQuery(name = "Request.findByStartDate", query = "SELECT r FROM Request r WHERE r.startDate = :startDate")})
 public class Request implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "req_id")
     private Integer reqId;
+    @Column(name = "leave_duration")
+    private Integer leaveDuration;
     @Basic(optional = false)
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
@@ -63,7 +62,6 @@ public class Request implements Serializable {
     private LeaveType leaveId;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "request")
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Basic(optional = true)
     private ManagerFill managerFill;
 
@@ -79,24 +77,10 @@ public class Request implements Serializable {
         this.startDate = startDate;
         this.reasons = reasons;
     }
-    
-    public Request(Employee employeeId, LeaveType leaveId, Date startDate, String reasons) {
-        this.employeeId = employeeId;
-        this.leaveId = leaveId;
-        this.startDate = startDate;
-        this.reasons = reasons;
-    }
 
-    public Request(Integer reqId, Employee employeeId, LeaveType leaveId, Date startDate, String reasons) {
+    public Request(Integer reqId, Employee employeeId, LeaveType leaveId, Integer leaveDuration, Date startDate, String reasons, ManagerFill managerFill) {
         this.reqId = reqId;
-        this.startDate = startDate;
-        this.reasons = reasons;
-        this.employeeId = employeeId;
-        this.leaveId = leaveId;
-    }
-
-    public Request(Integer reqId, Employee employeeId, LeaveType leaveId, Date startDate, String reasons, ManagerFill managerFill) {
-        this.reqId = reqId;
+        this.leaveDuration = leaveDuration;
         this.startDate = startDate;
         this.reasons = reasons;
         this.employeeId = employeeId;
@@ -110,6 +94,14 @@ public class Request implements Serializable {
 
     public void setReqId(Integer reqId) {
         this.reqId = reqId;
+    }
+
+    public Integer getLeaveDuration() {
+        return leaveDuration;
+    }
+
+    public void setLeaveDuration(Integer leaveDuration) {
+        this.leaveDuration = leaveDuration;
     }
 
     public Date getStartDate() {

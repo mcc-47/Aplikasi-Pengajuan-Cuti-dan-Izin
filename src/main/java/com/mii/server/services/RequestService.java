@@ -60,6 +60,7 @@ public class RequestService {
                 i,
                 new Employee(request.getEmployeeId()), 
                 new LeaveType(request.getLeaveId()), 
+                request.getLeaveDuration(),
                 request.getStartDate(), 
                 request.getReasons(), 
                 managerFill);

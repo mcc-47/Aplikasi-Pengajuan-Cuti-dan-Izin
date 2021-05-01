@@ -16,15 +16,17 @@ public class RequestDto {
     private Integer reqId;
     private Integer employeeId;
     private Integer leaveId;
+    private Integer leaveDuration;
     private String reasons;
     private Date startDate;
 
     public RequestDto() {
     }
 
-    public RequestDto(Integer employeeId, Integer leaveId, String reasons, Date startDate) {
+    public RequestDto(Integer employeeId, Integer leaveId, Integer leaveDuration, String reasons, Date startDate) {
         this.employeeId = employeeId;
         this.leaveId = leaveId;
+        this.leaveDuration = leaveDuration;
         this.reasons = reasons;
         this.startDate = startDate;
     }
@@ -51,6 +53,14 @@ public class RequestDto {
 
     public void setLeaveId(Integer leaveId) {
         this.leaveId = leaveId;
+    }
+
+    public Integer getLeaveDuration() {
+        return leaveDuration;
+    }
+
+    public void setLeaveDuration(Integer leaveDuration) {
+        this.leaveDuration = leaveDuration;
     }
 
     public String getReasons() {
