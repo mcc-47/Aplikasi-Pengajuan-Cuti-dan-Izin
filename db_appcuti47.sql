@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2021 at 05:41 PM
+-- Generation Time: May 01, 2021 at 05:46 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -45,16 +45,16 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employee_id`, `employee_name`, `gender`, `religion`, `email`, `job_title`, `total_leave`, `entry_date`, `discharge_date`, `manager_id`) VALUES
-(1, 'A1', 'Male', 'Islam', 'totoc99892@yehudabx.com', 'Application Developer', 10, '2015-01-10', NULL, 1),
-(2, 'A2', 'Male', 'Islam', 'A2@mail.com', 'Application Developer', 10, '2015-02-10', NULL, 1),
-(3, 'A3', 'Male', 'Islam', 'A3@mail.com', 'Application Developer', 10, '2015-03-10', NULL, 2),
-(4, 'B3', 'Male', 'Protestan', 'B3@mail.com', 'Application Developer', 10, '2015-03-10', NULL, 2),
-(5, 'A4', 'Male', 'Islam', 'A4@mail.com', 'Application Developer', 10, '2016-04-10', NULL, 3),
-(6, 'B4', 'Female', 'Islam', 'B4@mail.com', 'Application Developer', 10, '2016-04-10', NULL, 3),
-(7, 'C4', 'Male', 'Protestan', 'C4@mail.com', 'Application Developer', 10, '2017-04-10', NULL, 4),
-(8, 'D4', 'Female', 'Katolik', 'D4@mail.com', 'Application Developer', 10, '2017-04-10', NULL, 4),
-(9, 'ADM1', 'Male', 'Islam', 'ADM1@mail.com', 'Admin HR', 10, '2015-03-10', NULL, 1),
-(10, 'ADM2', 'Female', 'Islam', 'ADM2@mail.com', 'Admin HR', 10, '2015-03-10', NULL, 1);
+(1, 'A1', 'Male', 'Islam', 'totoc99892@yehudabx.com', 'Application Developer', 9, '2015-01-10', NULL, 1),
+(2, 'A2', 'Male', 'Islam', 'A2@mail.com', 'Application Developer', 9, '2015-02-10', NULL, 1),
+(3, 'A3', 'Male', 'Islam', 'A3@mail.com', 'Application Developer', 9, '2015-03-10', NULL, 2),
+(4, 'B3', 'Male', 'Protestan', 'B3@mail.com', 'Application Developer', 9, '2015-03-10', NULL, 2),
+(5, 'A4', 'Male', 'Islam', 'A4@mail.com', 'Application Developer', 9, '2016-04-10', NULL, 3),
+(6, 'B4', 'Female', 'Islam', 'B4@mail.com', 'Application Developer', 9, '2016-04-10', NULL, 3),
+(7, 'C4', 'Male', 'Protestan', 'C4@mail.com', 'Application Developer', 9, '2017-04-10', NULL, 4),
+(8, 'D4', 'Female', 'Katolik', 'D4@mail.com', 'Application Developer', 9, '2017-04-10', NULL, 4),
+(9, 'ADM1', 'Male', 'Islam', 'ADM1@mail.com', 'Admin HR', 9, '2015-03-10', NULL, 1),
+(10, 'ADM2', 'Female', 'Islam', 'ADM2@mail.com', 'Admin HR', 9, '2015-03-10', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -94,7 +94,8 @@ INSERT INTO `holiday` (`id`, `name`, `holiday_date`) VALUES
 (19, 'New Year 1443 H', '2021-08-10'),
 (20, 'Independent Day', '2021-08-17'),
 (21, 'Birthday of Prophet Muhammad', '2021-10-29'),
-(22, 'Christmas Day', '2021-12-25');
+(22, 'Christmas Day', '2021-12-25'),
+(23, 'New Year 2022', '2022-01-01');
 
 -- --------------------------------------------------------
 
@@ -104,22 +105,21 @@ INSERT INTO `holiday` (`id`, `name`, `holiday_date`) VALUES
 
 CREATE TABLE `leave_type` (
   `leave_id` int(2) NOT NULL,
-  `levae_name` varchar(255) NOT NULL,
-  `leave_duration` int(3) NOT NULL
+  `levae_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `leave_type`
 --
 
-INSERT INTO `leave_type` (`leave_id`, `levae_name`, `leave_duration`) VALUES
-(1, 'permit', 1),
-(2, 'paid leave', 1),
-(3, 'maternity leave', 90),
-(4, 'marriage leave', 3),
-(5, 'pilgrimage to mecca leave', 30),
-(6, 'child circumcision leave', 2),
-(7, 'bereavement leave', 2);
+INSERT INTO `leave_type` (`leave_id`, `levae_name`) VALUES
+(1, 'permit'),
+(2, 'paid leave'),
+(3, 'maternity leave'),
+(4, 'marriage leave'),
+(5, 'pilgrimage to mecca leave'),
+(6, 'child circumcision leave'),
+(7, 'bereavement leave');
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,7 @@ CREATE TABLE `manager_fill` (
   `note` text NOT NULL,
   `manager_id` int(5) NOT NULL,
   `status_id` int(2) NOT NULL,
-  `approvement_date` date NOT NULL
+  `approvement_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -140,10 +140,14 @@ CREATE TABLE `manager_fill` (
 --
 
 INSERT INTO `manager_fill` (`req_id`, `note`, `manager_id`, `status_id`, `approvement_date`) VALUES
-(1, 'All responsibility handle by A2', 1, 2, '2015-12-07'),
+(1, 'All responsibility handle by A2', 1, 3, '2021-04-30'),
 (2, 'Dont forget to notif your team', 1, 2, '2015-12-28'),
 (3, 'Happy wedding by the way', 2, 2, '2018-01-22'),
-(4, 'Keep strong', 3, 2, '2018-03-30');
+(4, 'Keep strong', 3, 2, '2018-03-30'),
+(5, 'gajelas', 1, 2, '2021-04-30'),
+(6, 'ya, pergilah liburan', 1, 2, '2021-05-01'),
+(7, 'monggooo', 1, 2, '2021-05-01'),
+(8, 'dah abizzz', 1, 3, '2021-05-01');
 
 -- --------------------------------------------------------
 
@@ -214,6 +218,7 @@ CREATE TABLE `request` (
   `req_id` int(5) NOT NULL,
   `employee_id` int(5) NOT NULL,
   `leave_id` int(2) NOT NULL,
+  `leave_duration` int(3) NOT NULL,
   `start_date` date NOT NULL,
   `reasons` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -222,11 +227,15 @@ CREATE TABLE `request` (
 -- Dumping data for table `request`
 --
 
-INSERT INTO `request` (`req_id`, `employee_id`, `leave_id`, `start_date`, `reasons`) VALUES
-(1, 1, 5, '2016-01-04', 'Go to Umrah with family'),
-(2, 2, 6, '2016-02-15', 'Elder child circumcision event'),
-(3, 3, 4, '2018-02-01', 'Wik wik wik'),
-(4, 5, 7, '2018-04-02', 'Grandma last day fufufu');
+INSERT INTO `request` (`req_id`, `employee_id`, `leave_id`, `leave_duration`, `start_date`, `reasons`) VALUES
+(1, 1, 5, 30, '2016-01-04', 'Go to Umrah with family'),
+(2, 2, 6, 2, '2016-02-15', 'Elder child circumcision event'),
+(3, 3, 4, 3, '2018-02-01', 'Wik wik wik'),
+(4, 5, 7, 2, '2018-04-02', 'Grandma last day fufufu'),
+(5, 2, 7, 2, '2021-04-30', 'Lalala'),
+(6, 2, 2, 3, '2021-05-03', 'cuti dong'),
+(7, 1, 6, 2, '2021-05-01', 'sunat teroozzz'),
+(8, 1, 6, 2, '2021-05-03', 'sunat teroozzzaaa');
 
 -- --------------------------------------------------------
 
@@ -456,7 +465,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `holiday`
 --
 ALTER TABLE `holiday`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `leave_type`
@@ -468,7 +477,7 @@ ALTER TABLE `leave_type`
 -- AUTO_INCREMENT for table `mandatory_leave`
 --
 ALTER TABLE `mandatory_leave`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -528,6 +537,9 @@ CREATE DEFINER=`root`@`localhost` EVENT `change_total_leave` ON SCHEDULE EVERY 1
        employee      
     SET
        total_leave = 12$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `del` ON SCHEDULE EVERY 30 SECOND STARTS '2021-05-01 15:07:53' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM request
+	WHERE req_id=6$$
 
 DELIMITER ;
 COMMIT;
