@@ -44,7 +44,7 @@ public class RequestController {
     }
     
     @PostMapping("/by-employeeId")
-    public @ResponseBody List<Request> getOneRequest(@RequestBody Employee employeeId){
+    public @ResponseBody List<Request> getListRequest(@RequestBody Employee employeeId){
         return requestService.getByEmployeeId(employeeId);
     }
     
