@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2021 at 05:46 PM
+-- Generation Time: May 03, 2021 at 06:18 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -45,16 +45,16 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employee_id`, `employee_name`, `gender`, `religion`, `email`, `job_title`, `total_leave`, `entry_date`, `discharge_date`, `manager_id`) VALUES
-(1, 'A1', 'Male', 'Islam', 'totoc99892@yehudabx.com', 'Application Developer', 9, '2015-01-10', NULL, 1),
-(2, 'A2', 'Male', 'Islam', 'A2@mail.com', 'Application Developer', 9, '2015-02-10', NULL, 1),
-(3, 'A3', 'Male', 'Islam', 'A3@mail.com', 'Application Developer', 9, '2015-03-10', NULL, 2),
-(4, 'B3', 'Male', 'Protestan', 'B3@mail.com', 'Application Developer', 9, '2015-03-10', NULL, 2),
-(5, 'A4', 'Male', 'Islam', 'A4@mail.com', 'Application Developer', 9, '2016-04-10', NULL, 3),
-(6, 'B4', 'Female', 'Islam', 'B4@mail.com', 'Application Developer', 9, '2016-04-10', NULL, 3),
-(7, 'C4', 'Male', 'Protestan', 'C4@mail.com', 'Application Developer', 9, '2017-04-10', NULL, 4),
-(8, 'D4', 'Female', 'Katolik', 'D4@mail.com', 'Application Developer', 9, '2017-04-10', NULL, 4),
-(9, 'ADM1', 'Male', 'Islam', 'ADM1@mail.com', 'Admin HR', 9, '2015-03-10', NULL, 1),
-(10, 'ADM2', 'Female', 'Islam', 'ADM2@mail.com', 'Admin HR', 9, '2015-03-10', NULL, 1);
+(1, 'Joko Santosa', 'Male', 'Islam', 'joko@yopmail.com', 'Application Developer', 3, '2015-01-10', NULL, 1),
+(2, 'Devid Erliando ', 'Male', 'Islam', 'devid@yopmail.com', 'Application Developer', 4, '2015-02-10', NULL, 1),
+(3, 'Wahyu Kuncoro', 'Male', 'Islam', 'wahyu@yopmail.com', 'Application Developer', 9, '2015-03-10', NULL, 2),
+(4, 'Aqira Kelana', 'Male', 'Protestan', 'aqira@yopmail.com', 'Application Developer', 0, '2015-03-10', NULL, 2),
+(5, 'Fadel Muhammad Nasution', 'Male', 'Islam', 'fadel@yopmail.com', 'Application Developer', 9, '2021-03-08', NULL, 3),
+(6, 'Jaka Brajadenta', 'Male', 'Islam', 'jaka@yopmail.com', 'Application Developer', 8, '2016-04-10', NULL, 3),
+(7, 'Yosie Fridolin', 'Female', 'Protestan', 'yosie@yopmail.com', 'Application Developer', 9, '2017-04-10', NULL, 4),
+(8, 'Florentina Vela Nindyasari', 'Female', 'Katolik', 'florentina@yopmail.com', 'Application Developer', 9, '2017-04-10', NULL, 4),
+(9, 'Agus Kuncoro', 'Male', 'Islam', 'agus@yopmail.com', 'Admin HR', 9, '2015-03-10', NULL, 1),
+(10, 'Irene Sugiarto', 'Female', 'Islam', 'irene@yopmail.com', 'Admin HR', 9, '2015-03-10', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -143,11 +143,29 @@ INSERT INTO `manager_fill` (`req_id`, `note`, `manager_id`, `status_id`, `approv
 (1, 'All responsibility handle by A2', 1, 3, '2021-04-30'),
 (2, 'Dont forget to notif your team', 1, 2, '2015-12-28'),
 (3, 'Happy wedding by the way', 2, 2, '2018-01-22'),
-(4, 'Keep strong', 3, 2, '2018-03-30'),
-(5, 'gajelas', 1, 2, '2021-04-30'),
-(6, 'ya, pergilah liburan', 1, 2, '2021-05-01'),
-(7, 'monggooo', 1, 2, '2021-05-01'),
-(8, 'dah abizzz', 1, 3, '2021-05-01');
+(4, 'Keep strong', 3, 2, '2018-03-30');
+
+--
+-- Triggers `manager_fill`
+--
+DELIMITER $$
+CREATE TRIGGER `update_leave` AFTER UPDATE ON `manager_fill` FOR EACH ROW IF NEW.status_id=2 THEN
+            UPDATE employee SET total_leave = total_leave -(SELECT leave_duration
+                            FROM request r
+                            JOIN employee e ON r.employee_id = e.employee_id
+                            JOIN manager_fill m ON m.req_id = r.req_id
+                                             
+                        WHERE r.req_id = NEW.req_id)
+
+       WHERE employee_id = (SELECT e.employee_id
+                            FROM employee e JOIN request r ON e.employee_id = r.employee_id
+                            JOIN manager_fill m ON r.req_id = m.req_id
+                                                    
+                            WHERE r.req_id = NEW.req_id);
+
+        END IF
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -231,11 +249,7 @@ INSERT INTO `request` (`req_id`, `employee_id`, `leave_id`, `leave_duration`, `s
 (1, 1, 5, 30, '2016-01-04', 'Go to Umrah with family'),
 (2, 2, 6, 2, '2016-02-15', 'Elder child circumcision event'),
 (3, 3, 4, 3, '2018-02-01', 'Wik wik wik'),
-(4, 5, 7, 2, '2018-04-02', 'Grandma last day fufufu'),
-(5, 2, 7, 2, '2021-04-30', 'Lalala'),
-(6, 2, 2, 3, '2021-05-03', 'cuti dong'),
-(7, 1, 6, 2, '2021-05-01', 'sunat teroozzz'),
-(8, 1, 6, 2, '2021-05-03', 'sunat teroozzzaaa');
+(4, 5, 7, 2, '2018-04-02', 'Grandma last day fufufu');
 
 -- --------------------------------------------------------
 
@@ -323,16 +337,16 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`) VALUES
-(1, 'a1', '$2y$10$d/7i7Xs/rRD1QRyda8pyqu2hiirlW8nOVEuiEtAXFyjN5jyONPDsm'),
-(2, 'a2', '$2y$10$h9XrhE/CfwFFjjS7fF8bkueDktw7HgjKINAyL7XxRE15oyd6AVUD6'),
-(3, 'a3', '$2y$10$nE/aPRLOY2rxnCErwjwt/ugStvU5r.yNHb8yJ8nza6KOdREHgdWuy'),
-(4, 'b3', '$2y$10$G1RDp7KCDzZoPb5.yBVZ4Ow7fv36NVlcn3R8JMr4ewSPnySqKSWva'),
-(5, 'a4', '$2y$10$iStjCkKOLOtjyeF0qEwKUOc1rb.BaiKNj0PLRbiA8e9zm9bOTCx/m'),
-(6, 'b4', '$2y$10$mm0E0yydLaPqCZEFY/ujPOIFRhPEU/5n3D15HJRdBi5JiB9e1Ox42'),
-(7, 'c4', '$2y$10$CqBoZk/Law47v.WzSMLrn.2ZTnGRJw31O7fa2ECas9GZGTGIPGPgW'),
-(8, 'd4', '$2y$10$kZEiIj4kBHrInBI/qK9FMuaIuEE3tnI/cELqGgrIud0JWkS9hRY6O'),
-(9, 'adm1', '$2y$10$xXgQBONNKBQCQQzNz/bTfOq3SZfTrDsvJzO4.tQewjO6V8eYbwjiG'),
-(10, 'adm2', '$2y$10$BvEq0h6PkQ2VXbqLNXV89OfYhf0B1ZhF.5KN7Rlt0tUUsyJEbc4PK');
+(1, 'joko', '$2y$10$d/7i7Xs/rRD1QRyda8pyqu2hiirlW8nOVEuiEtAXFyjN5jyONPDsm'),
+(2, 'devid', '$2y$10$h9XrhE/CfwFFjjS7fF8bkueDktw7HgjKINAyL7XxRE15oyd6AVUD6'),
+(3, 'wahyu', '$2y$10$nE/aPRLOY2rxnCErwjwt/ugStvU5r.yNHb8yJ8nza6KOdREHgdWuy'),
+(4, 'aqira', '$2y$10$G1RDp7KCDzZoPb5.yBVZ4Ow7fv36NVlcn3R8JMr4ewSPnySqKSWva'),
+(5, 'fadel', '$2y$10$iStjCkKOLOtjyeF0qEwKUOc1rb.BaiKNj0PLRbiA8e9zm9bOTCx/m'),
+(6, 'jaka', '$2y$10$mm0E0yydLaPqCZEFY/ujPOIFRhPEU/5n3D15HJRdBi5JiB9e1Ox42'),
+(7, 'yosie', '$2y$10$CqBoZk/Law47v.WzSMLrn.2ZTnGRJw31O7fa2ECas9GZGTGIPGPgW'),
+(8, 'florentina', '$2y$10$kZEiIj4kBHrInBI/qK9FMuaIuEE3tnI/cELqGgrIud0JWkS9hRY6O'),
+(9, 'agus', '$2y$10$xXgQBONNKBQCQQzNz/bTfOq3SZfTrDsvJzO4.tQewjO6V8eYbwjiG'),
+(10, 'irene', '$2y$10$BvEq0h6PkQ2VXbqLNXV89OfYhf0B1ZhF.5KN7Rlt0tUUsyJEbc4PK');
 
 -- --------------------------------------------------------
 
