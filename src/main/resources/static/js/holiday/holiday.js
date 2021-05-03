@@ -17,6 +17,7 @@ $(document).ready(() => {
         validationForm(updateHoliday);
     });
     
+    
 });
 
 
@@ -170,3 +171,4 @@ function onClickDeleteH(id){
                 }
         });
 }
+

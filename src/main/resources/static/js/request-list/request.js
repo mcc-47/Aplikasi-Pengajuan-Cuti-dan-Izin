@@ -175,6 +175,20 @@ function setDuration(){
 
 function setLeaveValidation(){
     
+    const picker = document.getElementById('startDate');
+    picker.addEventListener('input', function(e){
+        let day = new Date(this.value).getUTCDay();
+        if([6,0].includes(day) ){
+            e.preventDefault();
+            this.value = '';
+            errorPickDate();
+        }
+        
+        ambilHoliday(this.value,e);
+        
+        
+    });
+    
     $("#cutiMelahirkan").removeAttr('hidden');
     $("#cutiHaji").removeAttr('hidden');
     $("#cutiBiasa").removeAttr('hidden');
@@ -191,6 +205,29 @@ function setLeaveValidation(){
     
 }
 
+//GET BY ID
+function ambilHoliday(inputan,e) {
+    console.log("masuk ambil holidays");
+    $.ajax({
+        url: `/employee/get-holidays`,
+        datatype: "json",
+        type: 'GET',
+        success: (res) => {
+            let arrayHolidays = new Object();
+            arrayHolidays = res;
+            console.log("dapat respon list holiday");
+            console.log(arrayHolidays);
+            let pickDate = moment(new Date(inputan)).format('YYYY-MM-DD');
+            console.log("lala");
+            console.log(pickDate);
+            if (arrayHolidays.includes(pickDate)) {
+                e.preventDefault();
+                $("#startDate").val("");
+                errorPickDate();
+            }
+        }
+    });
+}
 
 //Sent Request Mail
 //function requestMail(){
