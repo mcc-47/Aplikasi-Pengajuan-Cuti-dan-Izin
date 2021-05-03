@@ -36,7 +36,9 @@ function getAllReqEmp() {
                 data: "leaveDuration", name: "Duration", autoWidth: true
             },
             {
-                data: "startDate", name: "Start Date", autoWidth: true
+                data: "startDate", name: "Start Date", autoWidth: true,
+                render: function (data, type, row, meta) {
+                      return moment(new Date(data).toString()).format('DD MMM YYYY');}
             },
             {
                 data: "reasons", name: "Reasons", autoWidth: true
@@ -102,6 +104,7 @@ function createRequest() {
         success: (res) => {
             createSuccessAlert();
             console.log("Success");
+//            requestMail();
             tableA.ajax.reload();
             $("#requestEmp").modal("hide");
             document.getElementById("reqLeaveForm").reset();
@@ -187,3 +190,15 @@ function setLeaveValidation(){
     setDuration();
     
 }
+
+
+//Sent Request Mail
+//function requestMail(){
+//    $.ajax({
+//        url: `/message/request`,
+//        type: 'GET',
+//        success: (res) => {
+//            console.log(res);
+//        }
+//    });
+//}

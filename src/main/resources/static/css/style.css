@@ -5,4 +5,23 @@ body   {background:#fff; height: 100%; margin: 0;}
 #main {background:#888; display: flex; height: calc( 100vh - 70px - 40px);}
 #left {background:#F9F5F4; width: 250px; align-items: center;}
 #right {padding: 25px; overflow: scroll; flex: 1 0 auto;}
-/*#foot  {background:white;}​*/
+#foot  {background:white;}​
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

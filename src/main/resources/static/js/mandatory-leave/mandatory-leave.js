@@ -37,7 +37,9 @@ function getAllMandatory() {
                 data: "name", name: "Name", autoWidth: true
             },
             {
-                data: "startDate", name: "Mandatory Leave Date", autoWidth: true
+                data: "startDate", name: "Mandatory Leave Date", autoWidth: true,
+                render: function (data, type, row, meta) {
+                      return moment(new Date(data).toString()).format('DD MMM YYYY');}
             },
             {
                 data: "duration", name: "Duration", autoWidth: true

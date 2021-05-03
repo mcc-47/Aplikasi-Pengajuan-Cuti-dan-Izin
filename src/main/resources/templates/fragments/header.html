@@ -1,15 +1,19 @@
 <div id='header' th:fragment="header">
     <div id="headerContent">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="height: 70px; padding: 0px 32px;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-2" style="height: 50px; padding: 0px 32px;">
+            <a class="navbar-brand " th:href="@{/login}">E-Cuti</a>
             <div class="container-fluid">
-                <a class="navbar-brand" th:href="@{/login}">E-Cuti</a>  
-                <a class="ml-auto " th:href="@{/employee/profile}" style="margin: 0px 16px 0px 0px; color: white;" th:if="not ${#strings.contains(#httpServletRequest.requestURI, '/login')}">
-                    <i class="fa fa-user-circle fa-2x"></i></a>
-                <p style="margin: 0px 16px 0px 0px; text-transform: uppercase; color: white;" th:if="not ${#strings.contains(#httpServletRequest.requestURI, '/login')}">
-                    Welcome, <span id="headusername" sec:authentication="name"></span></p>
-                <form id="logoutform" action="/logout" class="d-flex form-inline my-0 my-2 my-lg-0">
-                    <button id="logoutButton" class="btn btn-outline-success my-2 my-sm-0" th:if="not ${#strings.contains(#httpServletRequest.requestURI, '/login')}"  type="button">Logout</button>
-                </form>
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                </ul>
+                <div class="d-flex">
+                    <a class="ml-auto " th:href="@{/employee/profile}" style="margin: 0px 16px 0px 0px; color: white;" th:if="not ${#strings.contains(#httpServletRequest.requestURI, '/login')}">
+                        <i class="fa fa-user-circle fa-2x"></i></a>
+                    <p style="margin: 5px 16px 0px 0px; text-transform: uppercase; color: white;" th:if="not ${#strings.contains(#httpServletRequest.requestURI, '/login')}">
+                        Welcome, <span id="username" sec:authentication="name" ></span></p>
+                    <form id="logoutform" action="/logout" class="form-inline my-0 my-2 my-lg-0">
+                        <button id="logoutButton" class="btn btn-outline-success my-2 my-sm-0" th:headusernameif="not ${#strings.contains(#httpServletRequest.requestURI, '/login')}"  type="button">Logout</button>
+                    </form>
+                </div>
             </div>
         </nav>
     </div>

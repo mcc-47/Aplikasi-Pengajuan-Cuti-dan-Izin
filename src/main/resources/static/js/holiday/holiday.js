@@ -21,6 +21,7 @@ $(document).ready(() => {
 
 
 function getAll() {
+//    $.fn.dataTable.moment('DD/MM/YYYY');
     tableHol = $('#holidayTable').DataTable({
         filter: true,
         orderMulti: true,
@@ -37,7 +38,10 @@ function getAll() {
                 data: "name", name: "Holiday", autoWidth: true
             },
             {
-                data: "holidayDate", name: "Holiday Date", autoWidth: true
+                data: "holidayDate", name: "Holiday Date", autoWidth: true,
+                render: function (data, type, row, meta) {
+                      return moment(new Date(data).toString()).format('DD MMM YYYY');}
+//                ,render: $.fn.dataTable.render.moment('YYYY/MM/DD', 'Do MMM YY')
             },
             {
                 render: (data, type, row, meta) => {

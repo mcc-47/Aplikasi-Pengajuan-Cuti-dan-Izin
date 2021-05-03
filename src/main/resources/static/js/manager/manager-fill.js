@@ -36,7 +36,9 @@ function getAllManager() {
                 data: "leaveName", name: "Leave Type", autoWidth: true
             },
             {
-                data: "startDate", name: "Start Date", autoWidth: true
+                data: "startDate", name: "Start Date", autoWidth: true,
+                render: function (data, type, row, meta) {
+                      return moment(new Date(data).toString()).format('DD MMM YYYY');}
             },
             {
                 data: "duration", name: "Duration", autoWidth: true
