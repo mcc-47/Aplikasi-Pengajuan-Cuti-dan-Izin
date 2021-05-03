@@ -42,7 +42,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/mandatory-leave","/api/holiday").hasRole("ADMINHR")
+                .antMatchers("/api/mandatory-leave","/api/holiday").hasAnyRole("ADMINHR","EMPLOYEE")
                 .antMatchers(HttpMethod.GET, "/api/employee").hasRole("ADMINHR")
                 .antMatchers(HttpMethod.GET, "/api/employee/**").hasAnyRole("ADMINHR","MANAGER","EMPLOYEE")
                 .antMatchers(HttpMethod.POST, "/api/employee").hasRole("ADMINHR")
