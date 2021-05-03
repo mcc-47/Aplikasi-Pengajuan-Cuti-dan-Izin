@@ -14,6 +14,7 @@ import com.mii.server.entities.Request;
 import com.mii.server.entities.Status;
 import com.mii.server.repositories.RequestRepository;
 import java.util.List;
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,9 @@ public class RequestService {
     @Autowired
     EmployeeService es;
     
+    @Autowired
+    MessageService ms;
+    
 //    CRUD
     public List<Request> listAll(){
         return requestRepository.findAll();
@@ -43,13 +47,13 @@ public class RequestService {
         return requestRepository.findByEmployeeId(employeeId);
     }
     
-    public Request create(RequestDto request){
+    public Request create(RequestDto request) throws MessagingException {
         List<Request> reqs = listAll();
         int i = 0;
         for (Request req : reqs) {
             i = req.getReqId();
         }
-        i++;
+        i = i + 1;
         EmployeeDto e = es.getOneById(request.getEmployeeId());
         ManagerFill managerFill = new ManagerFill(
                 i, 
@@ -64,7 +68,12 @@ public class RequestService {
                 request.getStartDate(), 
                 request.getReasons(), 
                 managerFill);
-        return requestRepository.save(newRequest);
+        
+        Request newReq = requestRepository.save(newRequest);
+        if (requestRepository.existsById(i)) {
+            ms.sentRequest(newReq.getEmployeeId().getManagerId().getEmployeeId());
+        }
+        return newReq;
     }
         
     public Request update(Integer id, RequestDto request){

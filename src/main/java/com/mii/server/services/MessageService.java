@@ -28,6 +28,9 @@ public class MessageService {
     @Autowired
     EmployeeRepository employeeRepository;
     
+//    @Autowired
+//    private SpringTemplateEngine templateEngine;
+    
     @Value("${spring.mail.username}")
     String sender;
 
@@ -37,17 +40,19 @@ public class MessageService {
     }
     
     public void sentRequest(Integer employeeId) throws MessagingException{
-        //Finding employee
+        //Finding employee //Mime making email
         Employee manager = employeeRepository.findById(employeeId).get();
-        //Mime making email
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        
+//        String html = templateEngine.process("file.html",true);
+        
         //From (App) sender
         helper.setFrom(sender);
         //To (person) receiver
         helper.setTo(manager.getEmail());
-        //Subject maker
-        helper.setSubject("Leave Request");
+       //Subject maker
+         helper.setSubject("Leave Request");
         //Mail body
         message.setText("You got leave request", "UTF-8", "html");
         //Sending email

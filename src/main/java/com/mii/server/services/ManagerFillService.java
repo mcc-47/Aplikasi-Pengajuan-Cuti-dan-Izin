@@ -10,6 +10,7 @@ import com.mii.server.entities.ManagerFill;
 import com.mii.server.repositories.ManagerFillRepository;
 import java.util.ArrayList;
 import java.util.List;
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class ManagerFillService {
     
     @Autowired
     ManagerFillRepository managerFillRepository;
+    
+    @Autowired
+    MessageService ms;
     
 //    CRUD
     public List<ManagerFill> listAll(){
@@ -52,11 +56,16 @@ public class ManagerFillService {
         return managerFillRepository.save(managerFill);
     }
     
-    public ManagerFill update(Integer id, ManagerFill managerFill){
+    public ManagerFill update(Integer id, ManagerFill managerFill) throws MessagingException{
         ManagerFill oldManagerFill = managerFillRepository.getOne(id);
         oldManagerFill.setNote(managerFill.getNote());
         oldManagerFill.setStatusId(managerFill.getStatusId());
         oldManagerFill.setApprovementDate(managerFill.getApprovementDate());
+        
+        if (true) {
+            ms.sentResult(oldManagerFill.getRequest().getEmployeeId().getEmployeeId());
+        }
+        
         return managerFillRepository.save(oldManagerFill);
     }
     
