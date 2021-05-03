@@ -16,11 +16,11 @@
     <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/holiday')} ? 'dropdown-item active' : 'dropdown-item'" 
        style="font-size: 20; padding: 10px 30px;" th:href="@{/holiday}"
        sec:authorize="hasRole('ADMINHR')">
-        <i class="fa fa-users"></i>
+        <i class="fa fa-calendar"></i>
         Holiday</a>
     <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/mandatory-leave')} ? 'dropdown-item active' : 'dropdown-item'" 
        style="font-size: 20; padding: 10px 30px;" th:href="@{/mandatory-leave}"
        sec:authorize="hasRole('ADMINHR')">
-        <i class="fa fa-users"></i>
+        <i class="fa fa-calendar"></i>
         Mandatory Leave</a>
 </div>

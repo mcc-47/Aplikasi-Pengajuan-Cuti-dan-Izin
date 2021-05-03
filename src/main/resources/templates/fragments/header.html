@@ -11,7 +11,7 @@
                     <p style="margin: 5px 16px 0px 0px; text-transform: uppercase; color: white;" th:if="not ${#strings.contains(#httpServletRequest.requestURI, '/login')}">
                         Welcome, <span id="username" sec:authentication="name" ></span></p>
                     <form id="logoutform" action="/logout" class="form-inline my-0 my-2 my-lg-0">
-                        <button id="logoutButton" class="btn btn-outline-success my-2 my-sm-0" th:headusernameif="not ${#strings.contains(#httpServletRequest.requestURI, '/login')}"  type="button">Logout</button>
+                        <button id="logoutButton" class="btn btn-outline-primary my-2 my-sm-0" th:headusernameif="not ${#strings.contains(#httpServletRequest.requestURI, '/login')}"  type="button">Logout</button>
                     </form>
                 </div>
             </div>
