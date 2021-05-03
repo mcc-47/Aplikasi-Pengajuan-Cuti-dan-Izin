@@ -124,8 +124,22 @@ function setDuration(){
     if( document.getElementById("reqType").value === "2" ) {
         $("#leaveDuration").val(1);
         $("#leaveDuration").removeAttr('readonly');
-        $("#leaveDuration").attr('max', '5');
         $("#leaveDuration").attr('min', '1');
+        if (validasiProfil.totalLeave >= 5) {
+        $("#leaveDuration").attr('max', '5');
+        }
+        if (validasiProfil.totalLeave === 4) {
+        $("#leaveDuration").attr('max', '4');
+        }
+        if (validasiProfil.totalLeave === 3) {
+        $("#leaveDuration").attr('max', '3');
+        }
+        if (validasiProfil.totalLeave === 2) {
+        $("#leaveDuration").attr('max', '2');
+        }
+        if (validasiProfil.totalLeave === 1) {
+        $("#leaveDuration").attr('max', '1');
+        }
         console.log("oke masuk if isinya 2");
         }
     if( document.getElementById("reqType").value === "3" ) {
@@ -160,12 +174,16 @@ function setLeaveValidation(){
     
     $("#cutiMelahirkan").removeAttr('hidden');
     $("#cutiHaji").removeAttr('hidden');
-    setDuration();
+    $("#cutiBiasa").removeAttr('hidden');
     if (validasiProfil.gender === "Male") {
         $("#cutiMelahirkan").attr('hidden', true);
     }
     if (validasiProfil.religion !== "Islam") {
         $("#cutiHaji").attr('hidden', true);
     }
+    if (validasiProfil.totalLeave === 0) {
+        $("#cutiBiasa").attr('hidden', true);
+    }
+    setDuration();
     
 }
