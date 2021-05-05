@@ -110,7 +110,7 @@ function createRequest() {
             document.getElementById("reqLeaveForm").reset();
         },
         error: function (err) {
-            errorAlert();
+//            errorAlert();
         }
     });
 }

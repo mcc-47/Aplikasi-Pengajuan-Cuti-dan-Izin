@@ -9,6 +9,7 @@ package com.mii.client.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -30,6 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/css/**","/js/**").permitAll()
                 .antMatchers("/manager/**").hasRole("MANAGER")
+                .antMatchers(HttpMethod.GET,"/manager/**").hasRole("EMPLOYEE")
                 .antMatchers("/request/**").hasRole("EMPLOYEE")
                 .antMatchers("/holiday/**","/mandatory-leave/**").hasRole("ADMINHR")
                 .antMatchers("/dashboard", "/employee/**").authenticated()
