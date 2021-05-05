@@ -10,6 +10,7 @@ import com.mii.server.entities.Employee;
 import com.mii.server.entities.ManagerFill;
 import com.mii.server.services.ManagerFillService;
 import java.util.List;
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -56,7 +57,7 @@ public class ManagerFillController {
     }
     
     @PutMapping("/{id}")
-    public @ResponseBody ManagerFill updateManagerFill(@PathVariable Integer id, @RequestBody ManagerFill managerFill){
+    public @ResponseBody ManagerFill updateManagerFill(@PathVariable Integer id, @RequestBody ManagerFill managerFill) throws MessagingException{
         return managerFillService.update(id, managerFill);
     }
     

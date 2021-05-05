@@ -10,6 +10,7 @@ import com.mii.server.entities.Employee;
 import com.mii.server.entities.Request;
 import com.mii.server.services.RequestService;
 import java.util.List;
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +50,7 @@ public class RequestController {
     }
     
     @PostMapping
-    public @ResponseBody Request createRequest(@RequestBody RequestDto request){
+    public @ResponseBody Request createRequest(@RequestBody RequestDto request) throws MessagingException{
         return requestService.create(request);
     }
     
