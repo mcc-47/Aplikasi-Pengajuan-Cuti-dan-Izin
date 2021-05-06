@@ -10,7 +10,7 @@ $(document).ready(() => {
 //GET EMPLOYEE PROFILE
 function getByUsername() {
     auth = {
-        username: $("#employeeName").val(),
+        username: $("#employeeName").val()
     };
     
     $.ajax({
@@ -26,6 +26,8 @@ function getByUsername() {
                 totalLeave: res.totalLeave,
                 maritalStatus: res.maritalStatus
             };
+            console.log(validasiProfil);
+            validasiprofil()
             setFormP(res);
         },
         error: function (err) {

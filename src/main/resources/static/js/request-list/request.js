@@ -5,6 +5,7 @@ let tableA = null;
 
 $(document).ready(() => {
     getAllReqEmp();
+    setLeaveValidation();
     
     $("#reqLeaveForm").submit(e => {
         e.preventDefault();
@@ -110,123 +111,357 @@ function createRequest() {
     });
 }
 
-function setDuration(){
-    console.log("masuk fungsi");
-    if( $("#reqType").val() === "1" ) {
-        
-        
-        $("#leaveDuration").val(1);
-        $("#leaveDuration").removeAttr('readonly');
-        $("#leaveDuration").attr('max', '3');
-        $("#leaveDuration").attr('min', '1');
-        console.log("oke masuk if isinya 1");
-        $("#leaveDuration").on('change', function (e) {
-            if ($("#leaveDuration").val() > 3 ) {
-                $("#leaveDuration").val(3);
-            } else if ($("#leaveDuration").val() < 1 ) {
-                $("#leaveDuration").val(1);
-            }
 
+
+////////////////////////////////////////////////////////////////////////////////
+function setDuration(){
+    if( $("#reqType").val() === "1" ) {
+        $('#endDate').removeAttr('readonly');
+        $('#startDate').val(null);
+        $("#endDate").val(null);
+        $("#startDate").on('input', function(e){
+        $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 1;
+            let id = 2;
+            let numDay = new Date(this.value).getDay();
+            console.log(numDay);
+            if ( numDay > 3) {
+                id = 4;
+            }
+            let harinya = maxAkhir.getDate() + id;
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $("#endDate").attr('max', maxDate);
+            $("#endDate").on('input', function () {
+                let date1 = new Date($("#startDate").val());
+                let date2 = new Date($("#endDate").val());
+                let diff = date2.getTime() - date1.getTime();
+                let msInDay = 1000 * 3600 * 24;
+                $("#leaveDuration").val(diff/msInDay + 1 );
+            });
         });
         }
-        
+    ////////////////////////////////////////////////////////////////////////////
     if( $("#reqType").val() === "2" ) {
-        $("#leaveDuration").val(1);
-        $("#leaveDuration").removeAttr('readonly');
-        $("#leaveDuration").attr('min', '1');
-        
+        $('#endDate').removeAttr('readonly');
+        $('#startDate').val(null);
+        $('#endDate').val(null);
         if (validasiProfil.totalLeave >= 5) {
-        $("#leaveDuration").attr('max', '5');
-        $("#leaveDuration").on('change', function (e) {
-            if ($("#leaveDuration").val() > 5) {
-                $("#leaveDuration").val(5);
-            } else if ($("#leaveDuration").val() < 1 ) {
-                $("#leaveDuration").val(1);
+            $("#startDate").on('input', function(e){
+            $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 1;
+            let id = 4;
+            let numDay = new Date(this.value).getDay();
+            console.log(numDay);
+            if ( numDay > 1) {
+                id = 6;
             }
+            let harinya = maxAkhir.getDate() + id;
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $('#endDate').attr('max', maxDate);
+            $("#endDate").on('input', function () {
+                let date1 = new Date($("#startDate").val());
+                let date2 = new Date($("#endDate").val());
+                let diff = date2.getTime() - date1.getTime();
+                let msInDay = 1000 * 3600 * 24;
+                $("#leaveDuration").val(diff/msInDay + 1 );
+            });
         });
         }
         if (validasiProfil.totalLeave === 4) {
-        $("#leaveDuration").attr('max', '4');
-        $("#leaveDuration").on('change', function (e) {
-            if ($("#leaveDuration").val() > 4) {
-                $("#leaveDuration").val(4);
-            } else if ($("#leaveDuration").val() < 1 ) {
-                $("#leaveDuration").val(1);
+        $("#startDate").on('input', function(e){
+            $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 1;
+            let id = 3;
+            let numDay = new Date(this.value).getDay();
+            console.log(numDay);
+            if ( numDay > 2) {
+                id = 5;
             }
+            let harinya = maxAkhir.getDate() + id;
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $('#endDate').attr('max', maxDate);
+            $("#endDate").on('input', function () {
+                let date1 = new Date($("#startDate").val());
+                let date2 = new Date($("#endDate").val());
+                let diff = date2.getTime() - date1.getTime();
+                let msInDay = 1000 * 3600 * 24;
+                $("#leaveDuration").val(diff/msInDay + 1 );
+            });
         });
         }
         if (validasiProfil.totalLeave === 3) {
-        $("#leaveDuration").attr('max', '3');
-        $("#leaveDuration").on('change', function (e) {
-            if ($("#leaveDuration").val() > 3) {
-                $("#leaveDuration").val(3);
-            } else if ($("#leaveDuration").val() < 1 ) {
-                $("#leaveDuration").val(1);
+        $("#startDate").on('input', function(e){
+            $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 1;
+            let id = 2;
+            let numDay = new Date(this.value).getDay();
+            if ( numDay > 3) {
+                id = 4;
             }
+            let harinya = maxAkhir.getDate() + id;
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $('#endDate').attr('max', maxDate);
+            $("#endDate").on('input', function () {
+                let date1 = new Date($("#startDate").val());
+                let date2 = new Date($("#endDate").val());
+                let diff = date2.getTime() - date1.getTime();
+                let msInDay = 1000 * 3600 * 24;
+                $("#leaveDuration").val(diff/msInDay + 1 );
+            });
         });
         }
         if (validasiProfil.totalLeave === 2) {
-        $("#leaveDuration").attr('max', '2');
-        $("#leaveDuration").on('change', function (e) {
-            if ($("#leaveDuration").val() > 2) {
-                $("#leaveDuration").val(2);
-            } else if ($("#leaveDuration").val() < 1 ) {
-                $("#leaveDuration").val(1);
+        $("#startDate").on('input', function(e){
+            $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 1;
+            let id = 1;
+            let numDay = new Date(this.value).getDay();
+            console.log(numDay);
+            if ( numDay > 2) {
+                id = 3;
             }
+            let harinya = maxAkhir.getDate() + id;
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $('#endDate').attr('max', maxDate);
+            $("#endDate").on('input', function () {
+                let date1 = new Date($("#startDate").val());
+                let date2 = new Date($("#endDate").val());
+                let diff = date2.getTime() - date1.getTime();
+                let msInDay = 1000 * 3600 * 24;
+                $("#leaveDuration").val(diff/msInDay + 1 );
+            });
         });
         }
         if (validasiProfil.totalLeave === 1) {
-        $("#leaveDuration").attr('max', '1');
-        $("#leaveDuration").on('change', function (e) {
-            if ($("#leaveDuration").val() > 1 || $("#leaveDuration").val() < 1) {
-                $("#leaveDuration").val(1);
-            } 
+        $("#startDate").on('input', function(e){
+            $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 1;
+            let harinya = maxAkhir.getDate();
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $('#endDate').attr('max', maxDate);
+            $("#leaveDuration").val(1);
         });
         }
-        console.log("oke masuk if isinya 2");
+    }
+    /////////////////////////////////////////////////////////////////////////////
+
+    if( $("#reqType").val() === "3" ) {
+        $('#endDate').attr('readonly','readonly');
+        $('#startDate').val(null);
+        $('#endDate').val(null);
+        $("#startDate").on('input', function(e){
+            $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 4;
+            let harinya = maxAkhir.getDate();
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $('#endDate').val(maxDate);
+            $("#leaveDuration").val(90);
+        });
         }
         
-    if( $("#reqType").val() === "3" ) {
-        $("#leaveDuration").val(90);
-        $("#leaveDuration").attr('readonly', true);
-        console.log("oke masuk if isinya 3");
-        }
     if( $("#reqType").val() === "4" ) {
-        $("#leaveDuration").val(3);
-        $("#leaveDuration").attr('readonly', true);
-        console.log("oke masuk if isinya 4");
+        $('#endDate').attr('readonly','readonly');
+        $('#startDate').val(null);
+        $('#endDate').val(null);
+        $("#startDate").on('input', function(e){
+            $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 1;
+            let id = 2;
+            let numDay = new Date(this.value).getDay();
+            if ( numDay > 3) {
+                id = 4;
+            }
+            let harinya = maxAkhir.getDate() + id;
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $('#endDate').val(maxDate);
+            $("#leaveDuration").val(3);
+        });
         }
+        
     if( $("#reqType").val() === "5" ) {
-        $("#leaveDuration").val(30);
-        $("#leaveDuration").attr('readonly', true);
-        console.log("oke masuk if isinya 5");
+        $('#endDate').attr('readonly','readonly');
+        $('#startDate').val(null);
+        $('#endDate').val(null);
+        $("#startDate").on('input', function(e){
+            $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 2;
+            let harinya = maxAkhir.getDate();
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $('#endDate').val(maxDate);
+            $("#leaveDuration").val(30);
+        });
         }
+        
     if( $("#reqType").val() === "6" ) {
-        $("#leaveDuration").val(2);
-        $("#leaveDuration").attr('readonly', true);
-        console.log("oke masuk if isinya 6");
+        $('#endDate').attr('readonly','readonly');
+        $('#startDate').val(null);
+        $('#endDate').val(null);
+        $("#startDate").on('input', function(e){
+            $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 1;
+            let id = 1;
+            let numDay = new Date(this.value).getDay();
+            if ( numDay > 4) {
+                id = 3;
+            }
+            let harinya = maxAkhir.getDate() + id;
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $('#endDate').val(maxDate);
+            $("#leaveDuration").val(2);
+        });
         }
+        
     if( $("#reqType").val() === "7" ) {
-        $("#leaveDuration").val(2);
-        $("#leaveDuration").attr('readonly', true);
-        console.log("oke masuk if isinya 7");
+        $('#endDate').attr('readonly','readonly');
+        $('#startDate').val(null);
+        $('#endDate').val(null);
+        $("#startDate").on('input', function(e){
+            $('#endDate').val(null);
+            //max end date
+            let maxAkhir = new Date($("#startDate").val());
+            let bulannya = maxAkhir.getMonth() + 1;
+            let id = 1;
+            let numDay = new Date(this.value).getDay();
+            if ( numDay > 4) {
+                id = 3;
+            }
+            let harinya = maxAkhir.getDate() + id;
+            let tahunnya = maxAkhir.getFullYear();
+            if(bulannya < 10)
+                bulannya = '0' + bulannya.toString();
+            if(harinya < 10)
+                harinya = '0' + harinya.toString();
+            let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+            $('#endDate').val(maxDate);
+            $("#leaveDuration").val(2);
+        });
         }
-    
+        
 }
 
-function setLeaveValidation(){
-    let dateToday = new Date(); 
-    $(function() {
-        $( "#startDate" ).datepicker({
-            numberOfMonths: 3,
-            showButtonPanel: true,
-            minDate: dateToday
-        });
-    });
 
+////////////////////////////////////////////////////////////////////////////////
+function setLeaveValidation(){
+    console.log("set leave valid pls");
     
+    //ini buat gaboleh milih masa lalu
+    $(function(){
+        //min start date
+        let hariIni = new Date();
+        let bulannya = hariIni.getMonth() + 1;
+        let harinya = hariIni.getDate();
+        let tahunnya = hariIni.getFullYear();
+        if(bulannya < 10)
+            bulannya = '0' + bulannya.toString();
+        if(harinya < 10)
+            harinya = '0' + harinya.toString();
+
+        let maxDate = tahunnya + '-' + bulannya + '-' + harinya;
+        $('#startDate').attr('min', maxDate);
+        $('#endDate').attr('min', maxDate);
+    });
     
+    // gabisa milih weekend dan holiday
     $("#startDate").on('input', function(e){
+        let day = new Date(this.value).getUTCDay();
+        if([6,0].includes(day) ){
+            e.preventDefault();
+            this.value = '';
+            errorPickDate();
+        }
+        ambilHoliday(this.value,e);
+        
+        //min - end date
+        let awalnyaLo = new Date(this.value);
+        let bulan = awalnyaLo.getMonth() + 1;
+        let hari = awalnyaLo.getDate();
+        let tahun = awalnyaLo.getFullYear();
+        if(bulan < 10)
+            bulan = '0' + bulan.toString();
+        if(hari < 10)
+            hari = '0' + hari.toString();
+        let minDate = tahun + '-' + bulan + '-' + hari;
+        $('#endDate').attr('min', minDate);
+    });
+    
+    
+    // end date input gabisa weekend dan holiday
+    $("#endDate").on('input',function (e) {
+        if (!$("#startDate").val()) {
+            e.preventDefault();
+            this.value = '';
+            errorPickDate();
+        }
         let day = new Date(this.value).getUTCDay();
         if([6,0].includes(day) ){
             e.preventDefault();
@@ -236,29 +471,11 @@ function setLeaveValidation(){
         ambilHoliday(this.value,e);
     });
     
-    $("#startDate").on('input',function (e) {
-        let maxDate = new Date($("#endDate").attr('max', function (e) {
-            let maxEnd = new Date($("#startDate").val());
-            maxEnd.setDate(maxEnd.getDate()+2);
-            console.log("batasi end date");
-            console.log(maxEnd);
-            return moment(maxEnd).format('YYYY[-]MM[-]DD');
-        }));    
-        console.log(maxDate);
-    });
-    
-    $("#endDate").on('input',function (e) {
-        if (!$("#startDate").val() || [6,0].includes(new Date($("#endDatels")).getUTCDay())) {
-            e.preventDefault();
-            this.value = '';
-            errorPickDate();
-        }
-//        if ($("#endDate").val() > $("#endDate").attr('max').val()) {
-//            console.log("melebihi btas");
-//        }
-    });
-    
-    
+}
+
+//validasi data diri
+function validasiprofil() {
+    //hide sesuai profile
     $("#cutiMelahirkan").removeAttr('hidden');
     $("#cutiSunatAnak").removeAttr('hidden');
     $("#cutiHaji").removeAttr('hidden');
@@ -275,28 +492,22 @@ function setLeaveValidation(){
     if (validasiProfil.totalLeave === 0) {
         $("#cutiBiasa").attr('hidden', true);
     }
-    setDuration();
-    
 }
 
-//GET BY ID
+
+//gabisa holiday ////////////////////////////////////////////////////////////////////
 function ambilHoliday(inputan,e) {
-    console.log("masuk ambil holidays");
     $.ajax({
         url: `/employee/get-holidays`,
         datatype: "json",
         type: 'GET',
         success: (res) => {
-            let arrayHolidays = new Object();
             arrayHolidays = res;
-            console.log("dapat respon list holiday");
-            console.log(arrayHolidays);
             let pickDate = moment(new Date(inputan)).format('YYYY-MM-DD');
-            console.log("lala");
-            console.log(pickDate);
             if (arrayHolidays.includes(pickDate)) {
                 e.preventDefault();
                 $("#startDate").val("");
+                $("#endDate").val(null);
                 errorPickDate();
             }
         }
