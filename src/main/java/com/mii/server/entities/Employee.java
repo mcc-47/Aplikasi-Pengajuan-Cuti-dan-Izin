@@ -5,7 +5,6 @@
  */
 package com.mii.server.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Collection;
@@ -40,6 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")})
 public class Employee implements Serializable {
 
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +61,9 @@ public class Employee implements Serializable {
     @Basic(optional = false)
     @Column(name = "job_title")
     private String jobTitle;
+    @Basic(optional = false)
+    @Column(name = "marital_status")
+    private String maritalStatus;
     @Basic(optional = false)
     @Column(name = "total_leave")
     private int totalLeave;
@@ -96,33 +99,20 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
+    public Employee(String employeeName, String gender, String religion, String email, String jobTitle, String maritalStatus, int totalLeave, Date entryDate, Employee managerId) {
+        this.employeeName = employeeName;
+        this.gender = gender;
+        this.religion = religion;
+        this.email = email;
+        this.jobTitle = jobTitle;
+        this.maritalStatus = maritalStatus;
+        this.totalLeave = totalLeave;
+        this.entryDate = entryDate;
+        this.managerId = managerId;
+    }
+
     public Employee(Integer employeeId) {
         this.employeeId = employeeId;
-    }
-
-    public Employee(Integer employeeId, String employeeName, String gender, String religion, String email, String jobTitle, int totalLeave, Date entryDate, Date dischargeDate, Employee managerId) {
-        this.employeeId = employeeId;
-        this.employeeName = employeeName;
-        this.gender = gender;
-        this.religion = religion;
-        this.email = email;
-        this.jobTitle = jobTitle;
-        this.totalLeave = totalLeave;
-        this.entryDate = entryDate;
-        this.dischargeDate = dischargeDate;
-        this.managerId = managerId;
-    }
-
-    public Employee(String employeeName, String gender, String religion, String email, String jobTitle, int totalLeave, Date entryDate, Date dischargeDate, Employee managerId) {
-        this.employeeName = employeeName;
-        this.gender = gender;
-        this.religion = religion;
-        this.email = email;
-        this.jobTitle = jobTitle;
-        this.totalLeave = totalLeave;
-        this.entryDate = entryDate;
-        this.dischargeDate = dischargeDate;
-        this.managerId = managerId;
     }
 
     public Integer getEmployeeId() {
@@ -161,6 +151,14 @@ public class Employee implements Serializable {
         return email;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -173,6 +171,13 @@ public class Employee implements Serializable {
         this.jobTitle = jobTitle;
     }
 
+    public String getMaritalStatus() {
+        return maritalStatus;
+    }
+
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
     public int getTotalLeave() {
         return totalLeave;
     }
@@ -244,8 +249,9 @@ public class Employee implements Serializable {
         return requestCollection;
     }
 
+    
     public void setRequestCollection(Collection<Request> requestCollection) {
         this.requestCollection = requestCollection;
     }
-    
+
 }

@@ -37,17 +37,22 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Request.findByStartDate", query = "SELECT r FROM Request r WHERE r.startDate = :startDate")})
 public class Request implements Serializable {
 
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "req_id")
     private Integer reqId;
-    @Column(name = "leave_duration")
-    private Integer leaveDuration;
     @Basic(optional = false)
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
     private Date startDate;
+    @Column(name = "end_date")
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
+    @Basic(optional = false)
+    @Column(name = "leave_duration")
+    private Integer leaveDuration;
     @Basic(optional = false)
     @Lob
     @Column(name = "reasons")
@@ -68,24 +73,18 @@ public class Request implements Serializable {
     public Request() {
     }
 
-    public Request(Integer reqId) {
-        this.reqId = reqId;
-    }
-
-    public Request(Integer reqId, Date startDate, String reasons) {
+    public Request(Integer reqId, Date startDate, Date endDate, Integer leaveDuration, String reasons, Employee employeeId, LeaveType leaveId) {
         this.reqId = reqId;
         this.startDate = startDate;
-        this.reasons = reasons;
-    }
-
-    public Request(Integer reqId, Employee employeeId, LeaveType leaveId, Integer leaveDuration, Date startDate, String reasons, ManagerFill managerFill) {
-        this.reqId = reqId;
+        this.endDate = endDate;
         this.leaveDuration = leaveDuration;
-        this.startDate = startDate;
         this.reasons = reasons;
         this.employeeId = employeeId;
         this.leaveId = leaveId;
-        this.managerFill = managerFill;
+    }
+
+    public Request(Integer reqId) {
+        this.reqId = reqId;
     }
 
     public Integer getReqId() {
@@ -167,6 +166,14 @@ public class Request implements Serializable {
     @Override
     public String toString() {
         return "com.mii.server.entities.Request[ reqId=" + reqId + " ]";
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
     
 }

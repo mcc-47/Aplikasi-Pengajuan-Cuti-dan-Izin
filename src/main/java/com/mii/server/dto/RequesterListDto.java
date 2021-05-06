@@ -17,6 +17,7 @@ public class RequesterListDto {
     private String employeeName;
     private String leaveName;
     private Date startDate;
+    private Date endDate;
     private Integer duration;
     private String reasons;
     private String statusName;
@@ -24,11 +25,12 @@ public class RequesterListDto {
     public RequesterListDto() {
     }
 
-    public RequesterListDto(Integer reqId, String employeeName, String leaveName, Date startDate, Integer duration, String reasons, String statusName) {
+    public RequesterListDto(Integer reqId, String employeeName, String leaveName, Date startDate, Date endDate, Integer duration, String reasons, String statusName) {
         this.reqId = reqId;
         this.employeeName = employeeName;
         this.leaveName = leaveName;
         this.startDate = startDate;
+        this.endDate = endDate;
         this.duration = duration;
         this.reasons = reasons;
         this.statusName = statusName;
@@ -64,6 +66,14 @@ public class RequesterListDto {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Integer getDuration() {

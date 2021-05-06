@@ -19,16 +19,18 @@ public class RequestDto {
     private Integer leaveDuration;
     private String reasons;
     private Date startDate;
+    private Date endDate;
 
     public RequestDto() {
     }
 
-    public RequestDto(Integer employeeId, Integer leaveId, Integer leaveDuration, String reasons, Date startDate) {
+    public RequestDto(Integer employeeId, Integer leaveId, Integer leaveDuration, String reasons, Date startDate, Date endDate) {
         this.employeeId = employeeId;
         this.leaveId = leaveId;
         this.leaveDuration = leaveDuration;
         this.reasons = reasons;
         this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Integer getReqId() {
@@ -77,6 +79,14 @@ public class RequestDto {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
     
 }

@@ -29,6 +29,9 @@ public class RequestService {
     RequestRepository requestRepository;
     
     @Autowired
+    ManagerFillService mfs;
+    
+    @Autowired
     EmployeeService es;
     
     @Autowired
@@ -55,21 +58,23 @@ public class RequestService {
         }
         i = i + 1;
         EmployeeDto e = es.getOneById(request.getEmployeeId());
-        ManagerFill managerFill = new ManagerFill(
-                i, 
-                "Give ur notes", 
-                e.getManagerId(), 
-                new Status(1));
+        
         Request newRequest = new Request(
                 i,
-                new Employee(request.getEmployeeId()), 
-                new LeaveType(request.getLeaveId()), 
-                request.getLeaveDuration(),
                 request.getStartDate(), 
+                request.getEndDate(), 
+                request.getLeaveDuration(),
                 request.getReasons(), 
-                managerFill);
-        
+                new Employee(request.getEmployeeId()), 
+                new LeaveType(request.getLeaveId()));
         Request newReq = requestRepository.save(newRequest);
+        
+        ManagerFill managerFill = new ManagerFill(
+                i, 
+                e.getManagerId(), 
+                new Status(1));
+        mfs.create(managerFill);
+        
         if (requestRepository.existsById(i)) {
             ms.sentRequest(newReq.getEmployeeId().getManagerId().getEmployeeId());
         }
@@ -80,6 +85,7 @@ public class RequestService {
         Request oldUser = requestRepository.getOne(id);
         oldUser.setLeaveId(new LeaveType(request.getLeaveId()));
         oldUser.setStartDate(request.getStartDate());
+        oldUser.setEndDate(request.getEndDate());
         oldUser.setReasons(request.getReasons());
         return requestRepository.save(oldUser);
     }

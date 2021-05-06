@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "LeaveType.findAll", query = "SELECT l FROM LeaveType l")
     , @NamedQuery(name = "LeaveType.findByLeaveId", query = "SELECT l FROM LeaveType l WHERE l.leaveId = :leaveId")
-    , @NamedQuery(name = "LeaveType.findByLevaeName", query = "SELECT l FROM LeaveType l WHERE l.levaeName = :levaeName")})
+    , @NamedQuery(name = "LeaveType.findByLeaveName", query = "SELECT l FROM LeaveType l WHERE l.leaveName = :leaveName")})
 public class LeaveType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,8 +42,8 @@ public class LeaveType implements Serializable {
     @Column(name = "leave_id")
     private Integer leaveId;
     @Basic(optional = false)
-    @Column(name = "levae_name")
-    private String levaeName;
+    @Column(name = "leave_name")
+    private String leaveName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "leaveId")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Basic(optional = true)
@@ -56,9 +56,9 @@ public class LeaveType implements Serializable {
         this.leaveId = leaveId;
     }
 
-    public LeaveType(Integer leaveId, String levaeName) {
+    public LeaveType(Integer leaveId, String leaveName) {
         this.leaveId = leaveId;
-        this.levaeName = levaeName;
+        this.leaveName = leaveName;
     }
 
     public Integer getLeaveId() {
@@ -69,12 +69,12 @@ public class LeaveType implements Serializable {
         this.leaveId = leaveId;
     }
 
-    public String getLevaeName() {
-        return levaeName;
+    public String getLeaveName() {
+        return leaveName;
     }
 
-    public void setLevaeName(String levaeName) {
-        this.levaeName = levaeName;
+    public void setLeaveName(String leaveName) {
+        this.leaveName = leaveName;
     }
 
     @XmlTransient

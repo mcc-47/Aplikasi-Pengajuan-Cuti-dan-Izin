@@ -42,7 +42,7 @@ public class ManagerFill implements Serializable {
     @Basic(optional = false)
     @Column(name = "req_id")
     private Integer reqId;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Lob
     @Column(name = "note")
     private String note;
@@ -70,11 +70,10 @@ public class ManagerFill implements Serializable {
         this.reqId = reqId;
     }
 
-    public ManagerFill(Integer reqId, String note, int managerId, Date approvementDate) {
+    public ManagerFill(Integer reqId, int managerId, Status statusId) {
         this.reqId = reqId;
-        this.note = note;
         this.managerId = managerId;
-        this.approvementDate = approvementDate;
+        this.statusId = statusId;
     }
 
     public ManagerFill(Integer reqId, String note, int managerId, Status statusId) {

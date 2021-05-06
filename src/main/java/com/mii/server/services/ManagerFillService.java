@@ -43,8 +43,9 @@ public class ManagerFillService {
             reqListDto.add(new RequesterListDto(
                     managerFill.getReqId(), 
                     managerFill.getRequest().getEmployeeId().getEmployeeName(), 
-                    managerFill.getRequest().getLeaveId().getLevaeName(), 
+                    managerFill.getRequest().getLeaveId().getLeaveName(), 
                     managerFill.getRequest().getStartDate(), 
+                    managerFill.getRequest().getEndDate(), 
                     managerFill.getRequest().getLeaveDuration(), 
                     managerFill.getRequest().getReasons(), 
                     managerFill.getStatusId().getStatusName()));

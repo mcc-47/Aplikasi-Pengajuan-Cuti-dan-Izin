@@ -20,6 +20,7 @@ public class EmployeeDto {
     private String religion;
     private String email;
     private String jobTitle;
+    private String maritalStatus;
     private Integer totalLeave;
     private Date entryDate;
     private Date dischargeDate;
@@ -35,6 +36,7 @@ public class EmployeeDto {
             String religion, 
             String email, 
             String jobTitle, 
+            String maritalStatus,
             Integer totalLeave, 
             Date entryDate, 
             Date dischargeDate, 
@@ -45,6 +47,7 @@ public class EmployeeDto {
         this.religion = religion;
         this.email = email;
         this.jobTitle = jobTitle;
+        this.maritalStatus = maritalStatus;
         this.totalLeave = totalLeave;
         this.entryDate = entryDate;
         this.dischargeDate = dischargeDate;
@@ -97,6 +100,14 @@ public class EmployeeDto {
 
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
+    }
+
+    public String getMaritalStatus() {
+        return maritalStatus;
+    }
+
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
     }
 
     public Integer getTotalLeave() {
