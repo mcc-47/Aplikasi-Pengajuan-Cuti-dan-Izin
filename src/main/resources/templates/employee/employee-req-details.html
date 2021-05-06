@@ -15,35 +15,56 @@
                         <table  style="padding: 10">
                             <tr>
                                 <div class="form-group">
-                                    <td><label>Request ID</label></td>
-                                    <td><input type="number" name="req_Id" 
-                                               class="form-control" required
-                                               id="req_Id" readonly="readonly">
-                                    <div class="invalid-feedback">
-                                        This field is required.
-                                    </div></td>
+                                    <td><label>Request Type</label></td>
+                                    <td><textarea type="text-area" name="leaveTypeDet" 
+                                               class="form-control"
+                                               id="leaveTypeDet" readonly="readonly"></textarea>
+                                    </td>
                                 </div>
-                        </tr>
+                            </tr>
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>Reasons</label></td>
+                                    <td><textarea type="text-area" name="reasonsDet" 
+                                               class="form-control"
+                                               id="reasonsDet" readonly="readonly"></textarea>
+                                    </td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>Status</label></td>
+                                    <td><input type="text" name="statusDet" 
+                                               class="form-control"
+                                               id="statusDet" readonly="readonly">
+                                    </td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>Manager</label></td>
+                                    <td><input type="text" name="managerDet" 
+                                               class="form-control"
+                                               id="managerDet" readonly="readonly">
+                                    </td>
+                                </div>
+                            </tr>
                             <tr>
                                 <div class="form-group">
                                     <td><label>Notes</label></td>
                                     <td><textarea type="text-area" name="noteDet" 
-                                               class="form-control" required
+                                               class="form-control"
                                                id="noteDet" readonly="readonly"></textarea>
-                                    <div class="invalid-feedback" >
-                                        This field is required.
-                                    </div></td>
+                                    </td>
                                 </div>
                             </tr>
-                              <tr>
+                            <tr>
                                 <div class="form-group">
                                     <td><label>Approval Date</label></td>
                                     <td><input type="date" name="appDate" 
-                                               class="form-control" required
+                                               class="form-control"
                                                id="appDate" readonly="readonly">
-                                    <div class="invalid-feedback">
-                                        This field is required.
-                                    </div></td>
+                                    </td>
                                 </div>
                             </tr>
                         </table>

@@ -1,25 +1,25 @@
 <div id='left' th:fragment="left">
     <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/dashboard')} ? 'dropdown-item active' : 'dropdown-item'" 
-       style="font-size: 20; padding: 10px 30px;" th:href="@{/dashboard}">
+       style="font-size: 20; padding: 10px 30px; color: white" th:href="@{/dashboard}">
         <i class="fa fa-home"></i>
         Home</a>
     <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/request')} ? 'dropdown-item active' : 'dropdown-item'" 
-       style="font-size: 20; padding: 10px 30px;" th:href="@{/request}"
+       style="font-size: 20; padding: 10px 30px; color: white" th:href="@{/request}"
        sec:authorize="hasRole('EMPLOYEE')">
         <i class="fa fa-list"></i>
         Leave Request</a>
     <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/manager')} ? 'dropdown-item active' : 'dropdown-item'" 
-       style="font-size: 20; padding: 10px 30px;" th:href="@{/manager}"
+       style="font-size: 20; padding: 10px 30px; color: white" th:href="@{/manager}"
        sec:authorize="hasRole('MANAGER')">
         <i class="fa fa-list"></i>
         Request Approval</a>
     <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/holiday')} ? 'dropdown-item active' : 'dropdown-item'" 
-       style="font-size: 20; padding: 10px 30px;" th:href="@{/holiday}"
+       style="font-size: 20; padding: 10px 30px; color: white" th:href="@{/holiday}"
        sec:authorize="hasRole('ADMINHR')">
         <i class="fa fa-calendar"></i>
         Holiday</a>
     <a th:class="${#strings.equals(#httpServletRequest.requestURI, '/mandatory-leave')} ? 'dropdown-item active' : 'dropdown-item'" 
-       style="font-size: 20; padding: 10px 30px;" th:href="@{/mandatory-leave}"
+       style="font-size: 20; padding: 10px 30px; color: white" th:href="@{/mandatory-leave}"
        sec:authorize="hasRole('ADMINHR')">
         <i class="fa fa-calendar"></i>
         Mandatory Leave</a>

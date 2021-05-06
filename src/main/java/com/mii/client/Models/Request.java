@@ -17,6 +17,7 @@ public class Request {
     
     private Integer reqId;
     private Date startDate;
+    private Date endDate;
     private String reasons;
     private Integer leaveDuration;
     

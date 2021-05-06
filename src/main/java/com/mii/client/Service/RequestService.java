@@ -7,6 +7,7 @@ package com.mii.client.Service;
 
 import com.mii.client.Config.RequestFormat;
 import com.mii.client.Dto.EmployeeProfile;
+import com.mii.client.Dto.RequestDetailsDto;
 import com.mii.client.Dto.RequestLeave;
 import com.mii.client.Dto.RequestList;
 import com.mii.client.Models.AuthRequest;
@@ -34,7 +35,7 @@ public class RequestService {
     private RestTemplate restTemplate;
     
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
     
     @Value("${api.url}/api/request")
     private String url;
@@ -52,14 +53,31 @@ public class RequestService {
         for (Request req : response.getBody()) {
             reqList.add(new RequestList(
                     req.getReqId(), 
-                    req.getLeaveId().getLevaeName(), 
+                    req.getLeaveId().getLeaveName(), 
                     req.getLeaveDuration(), 
                     req.getStartDate(), 
+                    req.getEndDate(), 
                     req.getReasons(), 
                     employeeService.getEmployee(req.getManagerFill().getManagerId()).getEmployeeName(), 
                     req.getManagerFill().getStatusId().getStatusName()));
         }
         return reqList;
+    }
+    
+    public RequestDetailsDto getById(Integer id){
+        ResponseEntity<Request> response = restTemplate
+                .exchange(url+"/"+id, HttpMethod.GET, new HttpEntity<>(RequestFormat.createHeaders()),
+                        new ParameterizedTypeReference<Request>() {
+                });
+        Employee managerName = employeeService.getEmployee(response.getBody().getManagerFill().getManagerId());
+        RequestDetailsDto details = new RequestDetailsDto(
+                response.getBody().getLeaveId().getLeaveName(), 
+                response.getBody().getReasons(), 
+                response.getBody().getManagerFill().getStatusId().getStatusName(), 
+                managerName.getEmployeeName(), 
+                response.getBody().getManagerFill().getNote(), 
+                response.getBody().getManagerFill().getApprovementDate());
+        return details;
     }
     
     public Request create(RequestLeave req) {

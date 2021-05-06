@@ -4,7 +4,7 @@ let holiday = new Object();
 let tableHol = null;
 
 $(document).ready(() => {
-    console.log("di holiday");
+
     getAll();
     
     $("#createForm").submit(e => {
@@ -16,7 +16,6 @@ $(document).ready(() => {
         e.preventDefault();
         validationForm(updateHoliday);
     });
-    
     
 });
 
@@ -69,12 +68,10 @@ function getAll() {
 
 //GET BY ID
 function getById(id) {
-    console.log(id);
     $.ajax({
         url: `/holiday/${id}`,
         type: 'GET',
         success: (res) => {
-            console.log(res);
             setFormH(res);
         }
     }); 
@@ -92,7 +89,6 @@ function createHoliday() {
         name: $("#name").val(),
         holidayDate: $("#holidayDate").val()
     };
-    console.log(holiday);
     
     $.ajax({
         url: `/holiday`,
@@ -102,7 +98,6 @@ function createHoliday() {
         dataType: "json",
         success: (res) => {
             createSuccessAlert();
-            console.log("Success");
             tableHol.ajax.reload();
             $("#holidayModal").modal("hide");
             document.getElementById("createForm").reset();
@@ -120,7 +115,6 @@ function updateHoliday(){
         name: $("#nameU").val(),
         holidayDate: $("#holidayDateU").val()
     };
-    console.log(holiday);
     
     $.ajax({
         url: `/holiday/${holiday.id}`,
@@ -129,7 +123,6 @@ function updateHoliday(){
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: (res) => {
-            console.log("Success");
             tableHol.ajax.reload();
             updateSuccessAlert();
             $("#holidayEdit").modal("hide");

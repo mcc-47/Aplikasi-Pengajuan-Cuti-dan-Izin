@@ -10,6 +10,7 @@ package com.mii.client.Controller;
  * @author jakab
  */
 
+import com.mii.client.Dto.ApprovalModal;
 import com.mii.client.Dto.ApprovalResult;
 import com.mii.client.Dto.RequesterList;
 import com.mii.client.Models.ManagerFill;
@@ -52,7 +53,7 @@ public class ManagerController {
 
     @GetMapping("/{id}")
     public @ResponseBody
-    ManagerFill getById(@PathVariable("id") Integer id) {
+    ApprovalModal getById(@PathVariable("id") Integer id) {
         return managerService.getById(id);
     }
 

@@ -3,7 +3,9 @@ body   {background:#fff; height: 100%; margin: 0;}
 #header {height: 70px; display: flex; align-items: center;}
 #headerContent {margin: 0px;}
 #main {background:#888; display: flex; height: calc( 100vh - 70px - 40px);}
-#left {background:#F9F5F4; width: 250px; align-items: center;}
+#left {background:#34656d; width: 250px; align-items: center;}
+#mainL {background:#888; display: block; height: calc( 100vh - 70px - 0px);}
+#rightL {padding: 35px; flex: 1 0 auto;}
 #right {padding: 25px; overflow: scroll; flex: 1 0 auto;}
 #foot  {background:white;}​
 

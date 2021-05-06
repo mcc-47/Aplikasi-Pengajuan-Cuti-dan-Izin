@@ -15,45 +15,75 @@
                         <table  style="padding: 10">
                             <tr>
                                 <div class="form-group">
-                                    <td><label>Request ID</label></td>
-                                    <td><input type="number" name="reqId" 
-                                               class="form-control" required
-                                               id="reqId" readonly="readonly">
-                                    <div class="invalid-feedback">
-                                        This field is required.
-                                    </div></td>
+                                    <td><label>ID</label></td>
+                                    <td><input type="number" name="reqIdReq" 
+                                               class="form-control" required hidden
+                                               id="reqIdReq" readonly="readonly">
+                                    </td>
                                 </div>
                             </tr>
                             <tr>
                                 <div class="form-group">
-                                    <td><label>Approval</label></td>
-                                    <td><select id="status" required name="status" class="custom-select">
-                                            <option value="1">on progress</option>
-                                            <option value="2">accepted</option>
-                                            <option value="3">denied</option>
-                                        </select>
-                                    <div class="invalid-feedback">
-                                        This field is required.
-                                    </div></td>
+                                    <td><label>Employee</label></td>
+                                    <td><input type="text" name="employeeNameReq" 
+                                               class="form-control" required
+                                               id="employeeNameReq" readonly="readonly">
+                                    </td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>Total Leave</label></td>
+                                    <td><input type="number" name="totalLeaveReq" 
+                                               class="form-control" required
+                                               id="totalLeaveReq" readonly="readonly">
+                                    </td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>Start Date</label></td>
+                                    <td><input type="date" name="startDateReq" 
+                                               class="form-control" required
+                                               id="startDateReq" readonly="readonly">
+                                    </td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>End Date</label></td>
+                                    <td><input type="date" name="endDateReq" 
+                                               class="form-control" required
+                                               id="endDateReq" readonly="readonly">
+                                    </td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>Duration</label></td>
+                                    <td><input type="number" name="leaveDurationReq" 
+                                               class="form-control" required
+                                               id="leaveDurationReq" readonly="readonly">
+                                    </td>
                                 </div>
                             </tr>
                             <tr>
                                 <div class="form-group">
                                     <td><label>Notes</label></td>
-                                    <td><textarea type="text-area" name="note" 
+                                    <td><textarea type="text-area" name="noteReq" 
                                                class="form-control" required
-                                               id="note" ></textarea>
+                                               id="noteReq" placeholder="Give your notes"></textarea>
                                     <div class="invalid-feedback">
                                         This field is required.
                                     </div></td>
                                 </div>
                             </tr>
                             <tr>
-                                <td><input type="submit" value="Submit" 
-                                           class="btn btn-primary">
+                                <td><button type="submit" value="2" id="accReq"
+                                            class="btn btn-success">ACCEPT</button>
                                 </td>
-                                <td><input type="reset" value="Reset" 
-                                           class="btn btn-secondary">
+                                <td><button type="submit" value="3" id="denReq"
+                                            class="btn btn-danger">DENY</button>
                                 </td>
                             </tr>
                         </table>

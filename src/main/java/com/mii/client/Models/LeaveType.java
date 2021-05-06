@@ -15,14 +15,14 @@ import lombok.Data;
 public class LeaveType {
     
     private Integer leaveId;
-    private String levaeName;
+    private String leaveName;
 
     public LeaveType() {
     }
 
     public LeaveType(Integer leaveId, String leaveName) {
         this.leaveId = leaveId;
-        this.levaeName = leaveName;
+        this.leaveName = leaveName;
     }
     
 }

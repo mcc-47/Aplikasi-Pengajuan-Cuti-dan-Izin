@@ -3,7 +3,6 @@ let validasiProfil = new Object();
 let auth = new Object();
 
 $(document).ready(() => {
-    console.log("di employee");
     getByUsername();
     
 });
@@ -13,7 +12,6 @@ function getByUsername() {
     auth = {
         username: $("#employeeName").val(),
     };
-    console.log(auth);
     
     $.ajax({
         url: `/employee/by-username`,
@@ -22,13 +20,12 @@ function getByUsername() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: (res) => {
-            console.log(res);
             validasiProfil = {
                 gender: res.gender,
                 religion: res.religion,
                 totalLeave: res.totalLeave,
+                maritalStatus: res.maritalStatus
             };
-            console.log(validasiProfil);
             setFormP(res);
         },
         error: function (err) {
@@ -43,6 +40,7 @@ function setFormP(emp) {
     $("#religion").val(emp.religion);
     $("#email").val(emp.email);
     $("#jobTitle").val(emp.jobTitle);
+    $("#maritalStatus").val(emp.maritalStatus);
     $("#totalLeave").val(emp.totalLeave);
     $("#entryDate").val(moment(emp.entryDate).format('YYYY[-]MM[-]DD'));
     $("#managerId").val(emp.managerId);

@@ -34,7 +34,6 @@ public class MandatoryLeaveController {
     @GetMapping
     public String getAll(Model model) {
 //        model.addAttribute("mandatoryLeave", mandatoryLeaveService.getAll());
-        System.out.println("Mandatory Leave page");
         return "adminhr/mandatory-leave";
     }
     

@@ -5,6 +5,7 @@
  */
 package com.mii.client.Controller;
 
+import com.mii.client.Dto.RequestDetailsDto;
 import com.mii.client.Dto.RequestLeave;
 import com.mii.client.Dto.RequestList;
 import com.mii.client.Models.Request;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +34,6 @@ public class RequestController {
     
     @GetMapping
     public String getAll(Model model) {
-//        model.addAttribute("request", requestService.getAll());
-        System.out.println("req page");
         return "employee/employee-req";
     }
     
@@ -41,6 +41,12 @@ public class RequestController {
     public @ResponseBody
     List<RequestList> getAllProcess() {
         return requestService.getByEmpId();
+    }
+    
+    @GetMapping("/{id}")
+    public @ResponseBody
+    RequestDetailsDto getById(@PathVariable("id") Integer id) {
+        return requestService.getById(id);
     }
     
     @PostMapping

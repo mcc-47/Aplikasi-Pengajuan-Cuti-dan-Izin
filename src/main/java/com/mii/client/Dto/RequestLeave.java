@@ -21,21 +21,24 @@ public class RequestLeave {
     private Integer leaveDuration;
     private String reasons;
     private Date startDate;
+    private Date endDate;
 
     public RequestLeave() {
     }
 
-    public RequestLeave(Integer leaveId, String reasons, Date startDate) {
+    public RequestLeave(Integer leaveId, String reasons, Date startDate, Date endDate) {
         this.leaveId = leaveId;
         this.reasons = reasons;
         this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public RequestLeave(Integer employeeId, Integer leaveId, String reasons, Date startDate) {
+    public RequestLeave(Integer employeeId, Integer leaveId, String reasons, Date startDate, Date endDate) {
         this.employeeId = employeeId;
         this.leaveId = leaveId;
         this.reasons = reasons;
         this.startDate = startDate;
+        this.endDate = endDate;
     }
     
 }

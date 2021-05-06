@@ -22,7 +22,7 @@
                                             <option id="cutiMelahirkan" value="3">maternity leave</option>
                                             <option value="4">marriage leave</option>
                                             <option id="cutiHaji" value="5">pilgrimage to mecca leave</option>
-                                            <option value="6">child circumcision leave</option>
+                                            <option id="cutiSunatAnak" value="6">child circumcision leave</option>
                                             <option value="7">bereavement leave</option>
                                         </select>
                                     <div class="invalid-feedback">
@@ -30,7 +30,28 @@
                                     </div></td>
                                 </div>
                             </tr>
-                            
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>Start Date</label></td>
+                                    <td><input type="date" class="form-control" 
+                                               id="startDate"  
+                                               name="startate" required>
+                                    <div class="invalid-feedback">
+                                        This field is required.
+                                    </div></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="form-group">
+                                    <td><label>End Date</label></td>
+                                    <td><input type="date" class="form-control" 
+                                               id="endDate"  
+                                               name="endDate" required>
+                                    <div class="invalid-feedback">
+                                        This field is required.
+                                    </div></td>
+                                </div>
+                            </tr>
                             <!--durasi-->
                             <tr>
                                 <div class="form-group">
@@ -50,17 +71,6 @@
                                     <td><textarea type="text" name="reasons" 
                                                class="form-control" required
                                                id="reasons" ></textarea>
-                                    <div class="invalid-feedback">
-                                        This field is required.
-                                    </div></td>
-                                </div>
-                            </tr>
-                            <tr>
-                                <div class="form-group">
-                                    <td><label>Start Date</label></td>
-                                    <td><input type="date" class="form-control" 
-                                               id="startDate"  
-                                               name="startate" required>
                                     <div class="invalid-feedback">
                                         This field is required.
                                     </div></td>

@@ -21,6 +21,7 @@ public class Employee {
     private String religion;
     private String email;
     private String jobTitle;
+    private String maritalStatus;
     private Integer totalLeave;
     private Date entryDate;
     private Date dischargeDate;
@@ -33,12 +34,13 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public Employee(String employeeName, String gender, String religion, String email, String jobTitle, Integer totalLeave, Date entryDate, Date dischargeDate, Integer managerId) {
+    public Employee(String employeeName, String gender, String religion, String email, String jobTitle, String maritalStatus, Integer totalLeave, Date entryDate, Date dischargeDate, Integer managerId) {
         this.employeeName = employeeName;
         this.gender = gender;
         this.religion = religion;
         this.email = email;
         this.jobTitle = jobTitle;
+        this.maritalStatus = maritalStatus;
         this.totalLeave = totalLeave;
         this.entryDate = entryDate;
         this.dischargeDate = dischargeDate;
@@ -52,6 +54,7 @@ public class Employee {
         this.religion = religion;
         this.email = email;
         this.jobTitle = jobTitle;
+        this.maritalStatus = maritalStatus;
         this.totalLeave = totalLeave;
         this.entryDate = entryDate;
         this.dischargeDate = dischargeDate;

@@ -6,12 +6,14 @@
 package com.mii.client.Service;
 
 import com.mii.client.Config.RequestFormat;
+import com.mii.client.Dto.ApprovalModal;
 import com.mii.client.Dto.ApprovalResult;
 import com.mii.client.Dto.EmployeeProfile;
 import com.mii.client.Dto.RequesterList;
 import com.mii.client.Models.AuthRequest;
 import com.mii.client.Models.Employee;
 import com.mii.client.Models.ManagerFill;
+import com.mii.client.Models.Request;
 import com.mii.client.Models.Status;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
@@ -37,7 +39,10 @@ public class ManagerService {
     private RestTemplate restTemplate;
     
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
+    
+    @Autowired
+    private RequestService requestService;
    
     @Value("${api.url}/api/manager")
     private String url;
@@ -50,14 +55,31 @@ public class ManagerService {
                 .exchange(url+"/by-managerId", HttpMethod.POST, entity,
                         new ParameterizedTypeReference<List<RequesterList>>() {
                 });
-        
-         System.out.println("listed");
         return response.getBody();
     }
-     
-    public ManagerFill getById(Integer id) {
-        return restTemplate.getForEntity(url + "/" + id, ManagerFill.class).getBody();
+    
+    public ApprovalModal getById(Integer id) {
+        ResponseEntity<Request> response = restTemplate
+                .exchange("http://localhost:8091/api/request/"+id, HttpMethod.GET, 
+                        new HttpEntity<>(RequestFormat.createHeaders()),
+                        new ParameterizedTypeReference<Request>() {
+                });
+        ApprovalModal modal = new ApprovalModal(
+                response.getBody().getReqId(),
+                response.getBody().getEmployeeId().getEmployeeName(), 
+                response.getBody().getEmployeeId().getTotalLeave(), 
+                response.getBody().getStartDate(), 
+                response.getBody().getEndDate(), 
+                response.getBody().getLeaveDuration(), 
+                response.getBody().getManagerFill().getNote(), 
+                response.getBody().getManagerFill().getStatusId().getStatusName());
+        return modal;
     }
+    
+//    public ManagerFill getById(Integer id) {
+//        
+//        return restTemplate.getForEntity(url + "/" + id, ManagerFill.class).getBody();
+//    }
 
     public ManagerFill updateApproval(Integer id, ApprovalResult approval) {
         LocalDate now = LocalDate.now();

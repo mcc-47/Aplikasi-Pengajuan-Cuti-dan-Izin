@@ -21,6 +21,7 @@ public class EmployeeProfile {
     private String religion;
     private String email;
     private String jobTitle;
+    private String maritalStatus;
     private Integer totalLeave;
     private Date entryDate;
     private Date dischargeDate;
@@ -29,24 +30,26 @@ public class EmployeeProfile {
     public EmployeeProfile() {
     }
 
-    public EmployeeProfile(String employeeName, String gender, String religion, String email, String jobTitle, Integer totalLeave, Date entryDate, String managerId) {
+    public EmployeeProfile(String employeeName, String gender, String religion, String email, String jobTitle, String maritalStatus, Integer totalLeave, Date entryDate, String managerId) {
         this.employeeName = employeeName;
         this.gender = gender;
         this.religion = religion;
         this.email = email;
         this.jobTitle = jobTitle;
+        this.maritalStatus = maritalStatus;
         this.totalLeave = totalLeave;
         this.entryDate = entryDate;
         this.managerId = managerId;
     }
 
-    public EmployeeProfile(Integer employeeId, String employeeName, String gender, String religion, String email, String jobTitle, Integer totalLeave, Date entryDate, String managerId) {
+    public EmployeeProfile(Integer employeeId, String employeeName, String gender, String religion, String email, String jobTitle, String maritalStatus, Integer totalLeave, Date entryDate, String managerId) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.gender = gender;
         this.religion = religion;
         this.email = email;
         this.jobTitle = jobTitle;
+        this.maritalStatus = maritalStatus;
         this.totalLeave = totalLeave;
         this.entryDate = entryDate;
         this.managerId = managerId;

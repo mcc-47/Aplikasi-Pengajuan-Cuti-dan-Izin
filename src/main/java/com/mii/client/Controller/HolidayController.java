@@ -36,7 +36,6 @@ public class HolidayController {
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("holiday", holidayService.getAll());
-        System.out.println("holiday page");
         return "adminhr/holiday";
     }
     

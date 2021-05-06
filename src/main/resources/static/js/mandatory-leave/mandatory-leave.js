@@ -3,8 +3,6 @@ let tableMdl = null;
 
 $(document).ready(() => {
     
-    console.log("di mandatory leave")
-    
     getAllMandatory();
     
     $("#createMandatoryForm").submit(e => {
@@ -69,12 +67,10 @@ function getAllMandatory() {
 
 //GET BY ID
 function getMandatoryById(id) {
-    console.log(id);
     $.ajax({
         url: `/mandatory-leave/${id}`,
         type: 'GET',
         success: (res) => {
-            console.log(res);
             setMandatoryForm(res);
         }
     }); 
@@ -94,7 +90,6 @@ function createMandatoryLeave() {
         startDate: $("#startDate").val(),
         duration: $("#duration").val()
     };
-    console.log(mandatoryLeave);
     
     $.ajax({
         url: `/mandatory-leave`,
@@ -104,7 +99,6 @@ function createMandatoryLeave() {
         dataType: "json",
         success: (res) => {
             createSuccessAlert();
-            console.log("Success");
             tableMdl.ajax.reload();
             $("#mandatoryLeaveModal").modal("hide");
             document.getElementById("createMandatoryForm").reset();
@@ -123,7 +117,6 @@ function updateMandatoryLeave(){
         startDate: $("#startDateU").val(),
         duration: $("#durationU").val()
     };
-    console.log(mandatoryLeave);
     
     $.ajax({
         url: `/mandatory-leave/${mandatoryLeave.id}`,
@@ -132,7 +125,6 @@ function updateMandatoryLeave(){
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: (res) => {
-            console.log("Success");
             tableMdl.ajax.reload();
             updateSuccessAlert();
             $("#mandatoryLeaveEdit").modal("hide");

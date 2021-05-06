@@ -1,14 +1,13 @@
 <html lang="en-US" xmlns:th="http://www.thymeleaf.org">
     <head th:replace="fragments/head_link :: head_link">
     <body>
-        <div th:replace="fragments/header :: header"></div>
-        <div id='main'>
-            <div id='right' style="background-size: cover; background-image: url('/css/images/wallpaperlogin.jpg')";>
+        <div id='mainL'>
+            <div id='rightL' style="background-size: cover; background-image: url('/css/images/wallpaperlogin.jpg')";>
                 <div class="container d-flex justify-content-center align-items-center flex-column" style="height: 100%">
                     <div class="align-items-center" style="background-color: white; width: 40%; padding: 30px;">
                         <div class="container d-flex justify-content-center align-items-center flex-column">
                             <img src="/css/images/metrodata.png" style="width: 30%;">     
-                        <h1 class="title">Login Form</h1>
+                        <h1 class="title">Leave Management</h1>
                         <p th:text="${param.error} ? 'username or password incorrect' : ''"></p>
                         <p th:text="${param.logout} ? 'you have been logged out' : ''"></p>
                         <form action="#" method="post" id="loginForm" 
@@ -16,25 +15,24 @@
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" id="username" required>
-                                <div class="invalid-feedback" style="font-size: 12">
+                                <div class="invalid-feedback" style="font-size: 15">
                                     please input a valid username
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" required>
-                                <div class="invalid-feedback" style="font-size: 12">
+                                <div class="invalid-feedback" style="font-size: 15 ">
                                     please input a valid password
                                 </div>
                             </div>
                             <div style="color: white">A</div>
-                            <button type="submit" class="btn btn-primary">Sign In</button>
+                            <button type="submit" class="btn btn-primary" style="height:45; width: 200">Sign In</button>
                         </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div th:replace="fragments/footer :: footer"></div>
     </body>
 </html>

@@ -3,20 +3,22 @@ let tableMgr = null;
 
 $(document).ready(() => {
     
-    console.log("test")
-    
     getAllManager();
     
-    $("#updateManager").submit(e => {
+    $("#accReq").on('click',e => {
         e.preventDefault();
-        validationForm(updateManager);
+        validationForm(updateAccept);
+    });
+    
+    $("#denReq").on('click',e => {
+        e.preventDefault();
+        validationForm(updateDeny);
     });
     
 });
 
 
 function getAllManager() {
-    console.log("masuk get all manager")
     tableMgr = $('#managerTest').DataTable({
         filter: true,
         orderMulti: true,
@@ -36,22 +38,11 @@ function getAllManager() {
                 data: "leaveName", name: "Leave Type", autoWidth: true
             },
             {
-                data: "startDate", name: "Start Date", autoWidth: true,
-                render: function (data, type, row, meta) {
-                      return moment(new Date(data).toString()).format('DD MMM YYYY');}
-            },
-            {
-                data: "duration", name: "Duration", autoWidth: true
-            },
-            {
-                data: "reasons", name: "Reasons", autoWidth: true
-            },
-            {
                 render: (data, type, row, meta) => {
                     return `
                         <button 
-                            class='btn btn-sm btn-primary'
-                            data-toggle="modal" style="align:center"
+                            class='btn btn-sm ' id="appr"
+                            data-toggle="modal" onafterprint="changeColour('${row.reqId}')"
                             data-target="#ManagerEdit" 
                             onclick="getManagerById('${row.reqId}')">
                             <i class='fa fa-sm fa-circle-o-notch'></i>
@@ -63,36 +54,62 @@ function getAllManager() {
     });
 }
 
-
-//GET BY ID
-function getManagerById(id) {
-    console.log(id);
+function changeColour(id) {
+    console.log(`/manager/${id}`);
     $.ajax({
         url: `/manager/${id}`,
         type: 'GET',
         success: (res) => {
-            console.log(res);
+            console.log(res.statusName);
+            switch (res.statusName) {
+                case "on progress":
+                    $(this).addClass("btn-primary");
+                    break;
+                case "accepted":
+                    $(this).addClass("btn-success");
+                    break;
+                case "denied":
+                    $("#appr").addClass("btn-danger");
+                    console.log("masuk");
+                    break;
+                
+            }
+            
+        }
+    }); 
+    
+}
+
+
+//GET BY ID
+function getManagerById(id) {
+    $.ajax({
+        url: `/manager/${id}`,
+        type: 'GET',
+        success: (res) => {
             setManagerForm(res);
         }
     }); 
 }
 
 function setManagerForm(mdl) {
-    $("#reqId").val(mdl.reqId);
-    $("#status").val(mdl.statusId.statusId);
+    $("#reqIdReq").val(mdl.reqId);
+    $("#employeeNameReq").val(mdl.employeeName);
+    $("#totalLeaveReq").val(mdl.totalLeave);
+    $("#startDateReq").val(moment(mdl.startDate).format('YYYY[-]MM[-]DD'));
+    $("#endDateReq").val(moment(mdl.endDate).format('YYYY[-]MM[-]DD'));
+    $("#leaveDurationReq").val(mdl.leaveDuration);
     $("#note").val(mdl.note);
     }
 
 //update manager 
-function updateManager(){
+function updateAccept(){
     manager = {
-        reqId: $("#reqId").val(),
-        statusId: $("#status").val(),
-        note: $("#note").val(),
+        reqId: $("#reqIdReq").val(),
+        statusId: $("#accReq").val(),
+        note: $("#noteReq").val()
     };
-    console.log(manager);
     let linke = `/manager/${manager.reqId}`
-    console.log(linke);
     $.ajax({
         url: `/manager/${manager.reqId}`,
         type: 'PUT',
@@ -100,7 +117,29 @@ function updateManager(){
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: (res) => {
-            console.log("Success");
+            tableMgr.ajax.reload();
+            updateSuccessAlert();
+            $("#ManagerEdit").modal("hide");
+        },
+        error: function (err) {
+            errorAlert();
+        }
+    });
+}
+function updateDeny(){
+    manager = {
+        reqId: $("#reqIdReq").val(),
+        statusId: $("#denReq").val(),
+        note: $("#noteReq").val()
+    };
+    let linke = `/manager/${manager.reqId}`
+    $.ajax({
+        url: `/manager/${manager.reqId}`,
+        type: 'PUT',
+        data: JSON.stringify(manager),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: (res) => {
             tableMgr.ajax.reload();
             updateSuccessAlert();
             $("#ManagerEdit").modal("hide");

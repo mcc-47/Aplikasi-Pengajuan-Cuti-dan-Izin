@@ -58,6 +58,7 @@ public class EmployeeService {
                 emp.getReligion(), 
                 emp.getEmail(), 
                 emp.getJobTitle(), 
+                emp.getMaritalStatus(), 
                 emp.getTotalLeave(), emp.getEntryDate(), 
                 mgr.getEmployeeName());
         return profile;

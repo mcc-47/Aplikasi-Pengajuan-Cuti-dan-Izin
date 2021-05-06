@@ -13,30 +13,29 @@ import lombok.Data;
  * @author jakab
  */
 @Data
-public class RequestList {
+public class ApprovalModal {
     
     private Integer reqId;
-    private String leaveName;
-    private Integer leaveDuration;
+    private String employeeName;
+    private Integer totalLeave;
     private Date startDate;
     private Date endDate;
-    private String reasons;
-    private String manager;
+    private Integer leaveDuration;
+    private String note;
     private String statusName;
 
-    public RequestList() {
+    public ApprovalModal() {
     }
 
-    public RequestList(Integer reqId, String leaveName, Integer leaveDuration, Date startDate, Date endDate, String reasons, String manager, String statusName) {
+    public ApprovalModal(Integer reqId, String employeeName, Integer totalLeave, Date startDate, Date endDate, Integer leaveDuration, String note, String statusName) {
         this.reqId = reqId;
-        this.leaveName = leaveName;
-        this.leaveDuration = leaveDuration;
+        this.employeeName = employeeName;
+        this.totalLeave = totalLeave;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.reasons = reasons;
-        this.manager = manager;
+        this.leaveDuration = leaveDuration;
+        this.note = note;
         this.statusName = statusName;
     }
-    
     
 }
