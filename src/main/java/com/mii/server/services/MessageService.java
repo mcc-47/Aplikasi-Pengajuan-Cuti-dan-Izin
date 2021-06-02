@@ -54,7 +54,10 @@ public class MessageService {
        //Subject maker
          helper.setSubject("Leave Request");
         //Mail body
-        message.setText("You got leave request", "UTF-8", "html");
+        message.setText("Dear Manager, "
+                + "\n"
+                + "Your subordinate is requesting for leave in our Application. Please kindly check the application to give approval for the request. Thank you.\n"
+                + "\n", "UTF-8", "html");
         //Sending email
         javaMailSender.send(message);
     }
@@ -72,7 +75,7 @@ public class MessageService {
         //Subject maker
         helper.setSubject("Approval Result");
         //Mail body
-        message.setText("Here you requested answer", "UTF-8", "html");
+        message.setText("Dear Employee, your manager has give their result about your leave request, please check on the leave management application. Thank you", "UTF-8", "html");
         //Sending email
         javaMailSender.send(message);
     }
