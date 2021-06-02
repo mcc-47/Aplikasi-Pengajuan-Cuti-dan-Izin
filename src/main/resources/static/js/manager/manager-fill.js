@@ -41,8 +41,8 @@ function getAllManager() {
                 render: (data, type, row, meta) => {
                     return `
                         <button 
-                            class='btn btn-sm ' id="appr"
-                            data-toggle="modal" onafterprint="changeColour('${row.reqId}')"
+                            class='btn btn-sm ' id="${row.reqId}"
+                            data-toggle="modal" onload="changeColour('${row.reqId}')"
                             data-target="#ManagerEdit" 
                             onclick="getManagerById('${row.reqId}')">
                             <i class='fa fa-sm fa-circle-o-notch'></i>
@@ -54,6 +54,7 @@ function getAllManager() {
     });
 }
 
+
 function changeColour(id) {
     console.log(`/manager/${id}`);
     $.ajax({
@@ -64,13 +65,17 @@ function changeColour(id) {
             switch (res.statusName) {
                 case "on progress":
                     $(this).addClass("btn-primary");
+                    console.log("jalan");
                     break;
                 case "accepted":
                     $(this).addClass("btn-success");
+                    console.log("terima");
                     break;
                 case "denied":
-                    $("#appr").addClass("btn-danger");
-                    console.log("masuk");
+                    $(this).addClass("btn-danger");
+                    console.log("tolak");
+                    let idnya = document.getElementById('${id}')
+                    console.log(idnya);
                     break;
                 
             }

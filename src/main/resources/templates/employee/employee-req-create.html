@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Form Request</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Leave Request Form</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -15,7 +15,7 @@
                         <table  style="padding: 10">
                             <tr>
                                 <div class="form-group">
-                                    <td><label>Request Type</label></td>
+                                    <td><label>Request Type &emsp;</label></td>
                                     <td><select id="reqType" required name="reqType" class="custom-select" onchange="setDuration()">
                                             <option value="1">permit</option>
                                             <option id="cutiBiasa" value="2">paid leave</option>
@@ -76,6 +76,10 @@
                                     </div></td>
                                 </div>
                             </tr>
+                        </table>
+                        <br>
+                        <br>
+                        <table>
                             <tr>
                                 <td><input type="submit" value="Submit" 
                                            class="btn btn-primary">

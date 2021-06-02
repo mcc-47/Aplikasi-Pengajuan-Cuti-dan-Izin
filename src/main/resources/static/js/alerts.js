@@ -73,6 +73,6 @@ function errorPickDate(){
                 })
     Toast.fire({
         icon: 'error',
-        title: 'cant pick date'
+        title: 'cant pick weekend or public holiday'
     })
 }

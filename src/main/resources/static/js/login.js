@@ -84,7 +84,7 @@ function errorAlert(){
 $(document).ready(function () {
     $("#logoutButton").on("click", function () {
         Swal.fire({
-        position : 'top-end',
+        position : 'center',
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
